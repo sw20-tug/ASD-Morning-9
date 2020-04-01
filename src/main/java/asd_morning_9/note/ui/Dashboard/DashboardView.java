@@ -3,10 +3,15 @@ package asd_morning_9.note.ui.Dashboard;
 import asd_morning_9.note.JsonParser;
 import asd_morning_9.note.Note;
 import asd_morning_9.note.ui.MainLayout;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+//import org.graalvm.compiler.graph.Graph;
 
 @Route(value = "Dashboard", layout = MainLayout.class)
 @CssImport("./styles/Dashboard.css")
@@ -26,6 +31,14 @@ public class DashboardView extends VerticalLayout
     H1 header = new H1("This is the Dashboard");
     add(header);
 
+    TextField title = new TextField();
+    title.setLabel("Title");
+    title.setClassName("newNoteTitle");
+
+    TextArea content = new TextArea("Content");
+    content.getStyle().set("height", "150px");
+    content.setPlaceholder("Write here ...");
+    content.setClassName("newNoteContent");
 
     UnorderedList ui = new UnorderedList();
     ui.setId("notesUI");
@@ -41,6 +54,15 @@ public class DashboardView extends VerticalLayout
       ListItem li = new ListItem(cont);
       ui.add(li);
     }
+
+    add(new Button("Edit Note", event -> {
+      parser.EditNote(5, title.getValue(), content.getValue());
+      parser.SaveNotes();
+      Notification notification = new Notification(
+              "Note was edited successfully!", 2000,
+              Notification.Position.MIDDLE);
+      notification.open();
+    }));
 
     add(ui);
 
