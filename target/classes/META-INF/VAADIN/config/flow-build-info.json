@@ -1,7 +1,13 @@
 {
   "compatibilityMode": false,
   "productionMode": false,
+<<<<<<< HEAD
   "npmFolder": "/home/student/Documents/sw20-tug/ASD-Morning-9",
   "generatedFolder": "/home/student/Documents/sw20-tug/ASD-Morning-9/target/frontend",
   "frontendFolder": "/home/student/Documents/sw20-tug/ASD-Morning-9/frontend"
+=======
+  "npmFolder": "C:\\Users\\villa\\OneDrive\\Dokumente\\Uni\\4. Semster\\agile\\ASD-Morning-9",
+  "generatedFolder": "C:\\Users\\villa\\OneDrive\\Dokumente\\Uni\\4. Semster\\agile\\ASD-Morning-9\\target\\frontend",
+  "frontendFolder": "C:\\Users\\villa\\OneDrive\\Dokumente\\Uni\\4. Semster\\agile\\ASD-Morning-9\\frontend"
+>>>>>>> fb65ac83f4d03c431b0481aef20fdf8490721327
 }
