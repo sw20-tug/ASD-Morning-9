@@ -1,0 +1,23 @@
+#notesUI
+{
+    list-style: none;
+}
+
+#notesUI li
+{
+    float: left;
+}
+
+#notesUI div
+{
+    padding:15px;
+    margin:10px;
+    background:lightblue;
+    border-radius: 10px;
+}
+
+#notesUI div header
+{
+    font-weight: bold;
+    text-align: center;
+}
