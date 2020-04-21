@@ -181,45 +181,45 @@ public class JsonParser
     }
   }
 
-  // Delete given note
-//  public void DeleteNote(Note note)
-//  {
-//    try
-//    {
-//      // parsing file "JSONExample.json"
-//      Object obj = new JSONParser().parse(new FileReader(conf_file));
-//
-//      // typecasting obj to JSONObject
-//      JSONObject jo = (JSONObject) obj;
-//
-//      // getting notes
-//      JSONArray ja = (JSONArray) jo.get("Notes");
-//
-//      notes_.clear();
-//
-//      int id = note.getId();
-//      String title = note.getTitle();
-//      String content = note.getContent();
-//
-//      for (Object o : ja)
-//      {
-//        JSONObject item = (JSONObject) o;
-//        String id_string = JSONValue.toJSONString(item.get("id"));
-//        int id_ = Integer.parseInt(id_string);
-//        String title_ = item.get("title").toString();
-//        String content_ = item.get("content").toString();
-//
-//        if ((id == id_) && title_.equals(title) && content_.equals(content))
-//        {
-//
-//          /// TODO: DO DELETION
-//
-//        }
-//      }
-//    }
-//    catch (Exception e)
-//    {
-//      System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
-//    }
-//  }
+  //Delete given note
+  public void DeleteNote(Note note)
+  {
+    try
+    {
+      // parsing file "JSONExample.json"
+      Object obj = new JSONParser().parse(new FileReader(conf_file));
+
+      // typecasting obj to JSONObject
+      JSONObject jo = (JSONObject) obj;
+
+      // getting notes
+      JSONArray ja = (JSONArray) jo.get("Notes");
+
+      notes_.clear();
+
+      int id = note.getId();
+      String title = note.getTitle();
+      String content = note.getContent();
+
+      for (Object o : ja)
+      {
+        JSONObject item = (JSONObject) o;
+        String id_string = JSONValue.toJSONString(item.get("id"));
+        int id_ = Integer.parseInt(id_string);
+        String title_ = item.get("title").toString();
+        String content_ = item.get("content").toString();
+
+        if ((id == id_) && title_.equals(title) && content_.equals(content))
+        {
+
+          /// TODO: DO DELETION
+
+        }
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
+    }
+  }
 }
