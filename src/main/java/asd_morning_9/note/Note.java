@@ -44,6 +44,9 @@ public class Note
     this.completed = completed;
   }
 
+  /*public Note(String value, String value1) { //hab die erste Instanz entfernt
+  }*/
+
   public int getId()
   {
     return id;

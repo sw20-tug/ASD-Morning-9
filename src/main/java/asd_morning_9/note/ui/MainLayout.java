@@ -71,6 +71,7 @@ public class MainLayout extends AppLayout
     Notification notification = new Notification(
     "Here should be a dialog to create a new note..", 3000,
     Notification.Position.MIDDLE);
+
     notification.open();
   }
 }
