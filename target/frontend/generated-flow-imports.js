@@ -15,7 +15,11 @@ import $css_0 from 'Frontend/styles/MainLayout.css';
 addCssBlock(`<custom-style><style>${$css_0}</style></custom-style>`);
 import $css_1 from 'Frontend/styles/MainView.css';
 addCssBlock(`<custom-style><style>${$css_1}</style></custom-style>`);
+<<<<<<< HEAD
 import $css_2 from 'Frontend/styles/MainLayout.css';
+=======
+import $css_2 from 'Frontend/styles/MainView.css';
+>>>>>>> ecf1f2ff4412d04c47074f2c58d155a258001c41
 addCssBlock(`<custom-style><style>${$css_2}</style></custom-style>`);
 
 import '@polymer/iron-icon/iron-icon.js';

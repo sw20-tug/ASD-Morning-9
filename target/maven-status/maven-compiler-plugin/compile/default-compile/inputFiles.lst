@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /home/student/Documents/sw20-tug/ASD-Morning-9/src/main/java/asd_morning_9/note/JsonParser.java
 /home/student/Documents/sw20-tug/ASD-Morning-9/src/main/java/asd_morning_9/note/ui/MainLayout.java
 /home/student/Documents/sw20-tug/ASD-Morning-9/src/main/java/asd_morning_9/note/Note.java
@@ -11,3 +12,11 @@ C:\Users\villa\OneDrive\Dokumente\Uni\4. Semster\agile\ASD-Morning-9\src\main\ja
 C:\Users\villa\OneDrive\Dokumente\Uni\4. Semster\agile\ASD-Morning-9\src\main\java\asd_morning_9\note\ui\MainLayout.java
 C:\Users\villa\OneDrive\Dokumente\Uni\4. Semster\agile\ASD-Morning-9\src\main\java\asd_morning_9\note\Application.java
 >>>>>>> fb65ac83f4d03c431b0481aef20fdf8490721327
+=======
+C:\Users\gerjo\Desktop\Studium\4tes\Agile\ASD-Morning-9\src\main\java\asd_morning_9\note\Application.java
+C:\Users\gerjo\Desktop\Studium\4tes\Agile\ASD-Morning-9\src\main\java\asd_morning_9\note\ui\Dashboard\DashboardView.java
+C:\Users\gerjo\Desktop\Studium\4tes\Agile\ASD-Morning-9\src\main\java\asd_morning_9\note\JsonParser.java
+C:\Users\gerjo\Desktop\Studium\4tes\Agile\ASD-Morning-9\src\main\java\asd_morning_9\note\ui\MainLayout.java
+C:\Users\gerjo\Desktop\Studium\4tes\Agile\ASD-Morning-9\src\main\java\asd_morning_9\note\ui\MainView.java
+C:\Users\gerjo\Desktop\Studium\4tes\Agile\ASD-Morning-9\src\main\java\asd_morning_9\note\Note.java
+>>>>>>> ecf1f2ff4412d04c47074f2c58d155a258001c41
