@@ -7,15 +7,11 @@ function addCssBlock(block) {
  tpl.innerHTML = block;
  document.head.appendChild(tpl.content);
 }
-<<<<<<< HEAD
 import $css_0 from 'Frontend/styles/Dashboard.css';
-=======
-import $css_0 from 'Frontend/styles/MainLayout.css';
->>>>>>> 85a13d8d1cf97a16d8ac1a52086d871f198d021d
 addCssBlock(`<custom-style><style>${$css_0}</style></custom-style>`);
 import $css_1 from 'Frontend/styles/MainView.css';
 addCssBlock(`<custom-style><style>${$css_1}</style></custom-style>`);
-import $css_2 from 'Frontend/styles/MainView.css';
+import $css_2 from 'Frontend/styles/MainLayout.css';
 addCssBlock(`<custom-style><style>${$css_2}</style></custom-style>`);
 
 import '@polymer/iron-icon/iron-icon.js';
