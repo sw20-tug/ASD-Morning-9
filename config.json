@@ -1,1 +1,120 @@
-{"Notes":[{"id":1,"completed":false,"title":"New Note","content":"This is the content.","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":5,"completed":false,"title":"","content":"","tags":""},{"id":5,"completed":false,"title":"This is a title","content":"This is a content","tags":""}]}
+<<<<<<< HEAD
+{"Notes":[{"id":5,"completed":false,"title":"new Title","content":"suo","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":5,"completed":false,"title":"amk","content":"shall","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":2,"completed":false,"title":"new Title","content":"new Content","tags":""},{"id":5,"completed":false,"title":"","content":"","tags":""},{"id":5,"completed":false,"title":"This is a title","content":"This is a content","tags":""},{"id":5,"completed":false,"title":"hello","content":"hello","tags":""},{"id":5,"completed":false,"title":"hello","content":"hello","tags":""},{"id":5,"completed":false,"title":"amk","content":"amk","tags":""},{"id":5,"completed":false,"title":"","content":"","tags":""},{"id":5,"completed":false,"title":"New Note","content":"Gescahftt","tags":""},{"id":5,"completed":false,"title":"test","content":"test","tags":""}]}
+=======
+{
+  "Notes": [
+    {
+      "id": 1,
+      "completed": false,
+      "title": "New Note",
+      "content": "This is the content.",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 2,
+      "completed": false,
+      "title": "new Title",
+      "content": "new Content",
+      "tags": ""
+    },
+    {
+      "id": 5,
+      "completed": false,
+      "title": "",
+      "content": "",
+      "tags": ""
+    },
+    {
+      "id": 5,
+      "completed": false,
+      "title": "This is a title",
+      "content": "This is a content",
+      "tags": ""
+    }
+  ]
+}
+>>>>>>> 85a13d8d1cf97a16d8ac1a52086d871f198d021d
