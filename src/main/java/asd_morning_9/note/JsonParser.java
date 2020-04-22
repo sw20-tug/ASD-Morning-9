@@ -7,9 +7,10 @@ import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
-
+import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -35,20 +36,23 @@ public class JsonParser
     notes_.add(note);
   }
 
-  public void EditNote (int id, String content, String title)
+  public void EditNote (int id, String title, Note note)
   {
+    boolean check;
     for (Note item : notes_)
     {
-      if (item.getId() == id)
+      if (item.getTitle().equals(note.getTitle()))
       {
-        item.setContent(content);
+        //item.setContent(content);
         //item.setCompleted(completed);
         //item.setTags(tags);
-        item.setTitle(title);
+        int x;
+        x = item.getId();
+        notes_.set(x, note);
         break;
       }
     }
-    SaveNotes();
+    //SaveNotes();
   }
   public void SaveNotes()
   {
