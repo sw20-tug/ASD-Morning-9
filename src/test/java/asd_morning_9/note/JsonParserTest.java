@@ -89,6 +89,22 @@ public class JsonParserTest
     parser.DeleteNote(0);
     parser.SaveNotes();
   }
+
+  @Test
+  public void GetNewIdTest()
+  {
+    JsonParser parser;
+    ArrayList<Note> notes_;
+    parser = new JsonParser(test_file);
+    parser.ReadNotes(test_file);
+    notes_ = parser.getNotesList();
+
+    int last_id = notes_.get(notes_.size() - 1).getId();
+    parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
+    notes_ = parser.getNotesList();
+    int new_id = notes_.get(notes_.size() - 1).getId();
+    assertEquals(last_id + 1, new_id);
+  }
   
  @Test
     public void FilterNotesByTagTest()
