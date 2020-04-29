@@ -47,12 +47,28 @@ public class DashboardView extends VerticalLayout
     for (Note item : parser.getNotesList())
     {
       Div cont = new Div();
+      Div footer = new Div();
 
       Header head = new Header();
       head.add(item.getTitle());
 
+      //li.addClassName(Integer.toString(item.getId()));
+
+      footer.add(new Button("Remove", event -> {
+
+        parser.DeleteNote(item.getId());
+        parser.SaveNotes();
+
+        Notification notification = new Notification(
+        "successfully deleted..", 2000,
+        Notification.Position.MIDDLE);
+        notification.open();
+      }));
+
+
       cont.add(head);
       cont.add(item.getContent());
+      cont.add(footer);
       ListItem li = new ListItem(cont);
       ui.add(li);
     }
