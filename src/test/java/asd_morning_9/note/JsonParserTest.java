@@ -87,7 +87,27 @@ public class JsonParserTest
     parser.DeleteNote(0);
     parser.SaveNotes();
   }
+  
+ @Test
+    public void FilterNotesByTagTest()
+    {
+      JsonParser parser;
+      ArrayList<Note> notes_;
+      parser = new JsonParser(test_file);
+      parser.ReadNotes(test_file);
 
+      parser.AddNote(new Note(1, "Title1", "content1", "none"));
+      parser.AddNote(new Note(2, "Title2", "content2", "important"));
+      parser.AddNote(new Note(3, "Title3", "content3", "none"));
+      parser.AddNote(new Note(4, "Title4", "content4", "important"));
+      parser.AddNote(new Note(5, "Title5", "content5", "important"));
+
+      parser.FilterNotesByTag("important");
+      notes_ = parser.getNotesList();
+      assertEquals(expected_arr_size+2, notes_.size());
+      assertEquals("important", notes_.get(0).getTags());
+    }
+  
   @After
   public void tearDown()
   {
