@@ -276,6 +276,11 @@ public class JsonParser
     
   private int getNewId()
   {
-    return notes_.get(notes_.size() - 1).getId() + 1;
+    if (notes_.size() > 0)
+    {
+      return notes_.get(notes_.size() - 1).getId() + 1;
+    }
+
+    return 0;
   }
 }
