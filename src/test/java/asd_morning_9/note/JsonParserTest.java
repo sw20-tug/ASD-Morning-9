@@ -13,9 +13,6 @@ public class JsonParserTest
   private int expected_arr_size = 1;
   private String test_file = ".\\src\\test\\java\\asd_morning_9\\note\\config_test.json";
 
-  private JsonParser parser;
-  private ArrayList<Note> notes_;
-
   @Before
   public void setUp()
   {
@@ -25,6 +22,8 @@ public class JsonParserTest
   @Test
   public void readNotes()
   {
+    JsonParser parser;
+    ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     boolean result = parser.ReadNotes(test_file);
     notes_ = parser.getNotesList();
@@ -35,6 +34,8 @@ public class JsonParserTest
   @Test
   public void addNewNoteTest()
   {
+    JsonParser parser;
+    ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     parser.ReadNotes(test_file);
     parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
@@ -43,9 +44,26 @@ public class JsonParserTest
     assertEquals(expected_arr_size + 2, notes_.size());
   }
 
+
+  @Test
+  public void EditNoteTest()
+  {
+    parser = new JsonParser(test_file);
+    parser.ReadNotes(test_file);
+    Note note = new Note(0, "Title", "content", "this is a tag");
+    parser.EditNote(0, "Title", note);
+    notes_ = parser.getNotesList();
+    assertEquals(expected_arr_size , notes_.size());
+    parser.DeleteNote(0);
+    parser.SaveNotes();
+  }
+
+
   @Test
   public void DeleteNoteTest()
   {
+    JsonParser parser;
+    ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     parser.ReadNotes(test_file);
     parser.DeleteNote(0);
@@ -56,6 +74,8 @@ public class JsonParserTest
   @Test
   public void SaveNotesTest()
   {
+    JsonParser parser;
+    ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     parser.ReadNotes(test_file);
     parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));

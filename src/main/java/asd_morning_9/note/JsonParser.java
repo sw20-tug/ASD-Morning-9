@@ -58,7 +58,8 @@ public class JsonParser
         //item.setTags(tags);
         int x;
         x = item.getId();
-        notes_.set(x, note);
+        //notes_.set(x, note);
+        item.setContent(note.getContent());
         break;
       }
     }
