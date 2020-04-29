@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.After;
 
 import java.util.ArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
 
 public class JsonParserTest
 {
@@ -52,12 +52,12 @@ public class JsonParserTest
     ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     parser.ReadNotes(test_file);
-    Note note = new Note(0, "Title", "content", "this is a tag");
-    parser.EditNote(0, "Title", note);
-    notes_ = parser.getNotesList();
-    assertEquals(expected_arr_size , notes_.size());
-    parser.DeleteNote(0);
-    parser.SaveNotes();
+    Note tmp = parser.getNote(0);
+    String oldContent = tmp.getContent();
+    parser.EditNote(0, tmp.getTitle(), tmp);
+    Note note = parser.getNote(0);
+    String newContent = note.getContent();
+    assertNotSame(oldContent, newContent);
   }
 
 
