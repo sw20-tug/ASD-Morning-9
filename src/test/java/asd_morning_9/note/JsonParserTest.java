@@ -48,6 +48,8 @@ public class JsonParserTest
   @Test
   public void EditNoteTest()
   {
+    JsonParser parser;
+    ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     parser.ReadNotes(test_file);
     Note note = new Note(0, "Title", "content", "this is a tag");
