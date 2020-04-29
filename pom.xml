@@ -256,6 +256,7 @@
                             <enableAssertions>true</enableAssertions>
                             <systemPropertyVariables>
                                 <!-- Pass location of downloaded webdrivers to the tests -->
+                                <!--suppress UnresolvedMavenProperty -->
                                 <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                             </systemPropertyVariables>
                         </configuration>
