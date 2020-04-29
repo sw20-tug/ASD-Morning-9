@@ -108,6 +108,32 @@ public class JsonParserTest
       assertEquals("important", notes_.get(0).getTags());
     }
   
+  @Test
+    public void SortNoteByTitel()
+    {
+      JsonParser parser;
+      ArrayList<Note> notes_;
+  
+      parser = new JsonParser(test_file);
+      parser.ReadNotes(test_file);
+
+      parser.AddNote(new Note(0, "ATitle", "content", "this,are,some,tags"));
+      parser.AddNote(new Note(0, "GTitle", "content", "this,are,some,tags"));
+      parser.AddNote(new Note(0, "ITitle", "content", "this,are,some,tags"));
+      parser.AddNote(new Note(0, "LTitle", "content", "this,are,some,tags"));
+      parser.AddNote(new Note(0, "ETitle", "content", "this,are,some,tags"));
+
+      parser.SortNoteByTitel();
+      notes_ = parser.getNotesList();
+
+      assertEquals("ATitle",notes_.get(0).getTitle());
+      assertEquals("ETitle",notes_.get(1).getTitle());
+      assertEquals("GTitle",notes_.get(2).getTitle());
+      assertEquals("ITitle",notes_.get(3).getTitle());
+      assertEquals("LTitle",notes_.get(4).getTitle());
+      assertEquals("Title",notes_.get(5).getTitle());
+    }
+  
   @After
   public void tearDown()
   {
