@@ -227,4 +227,20 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
+  
+    //Filter notes
+    public void FilterNotesByTag(String tag)
+    {
+      try
+      {
+        notes_.removeIf(item -> !item.getTags().equals(tag));
+      }
+      catch (Exception e)
+      {
+        System.out.println("[ERROR IN FILTER NOTES] " + e.getMessage());
+      }
+    }
+    
+  
+  
 }
