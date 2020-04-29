@@ -43,6 +43,7 @@ public class JsonParser
 
   public void AddNote(Note note)
   {
+    note.setId(getNewId());
     notes_.add(note);
   }
 
@@ -260,19 +261,21 @@ public class JsonParser
     }
   }
   
-    //Filter notes
-    public void FilterNotesByTag(String tag)
+  //Filter notes
+  public void FilterNotesByTag(String tag)
+  {
+    try
     {
-      try
-      {
-        notes_.removeIf(item -> !item.getTags().equals(tag));
-      }
-      catch (Exception e)
-      {
-        System.out.println("[ERROR IN FILTER NOTES] " + e.getMessage());
-      }
+      notes_.removeIf(item -> !item.getTags().equals(tag));
     }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN FILTER NOTES] " + e.getMessage());
+    }
+  }
     
-  
-  
+  private int getNewId()
+  {
+    return notes_.get(notes_.size() - 1).getId() + 1;
+  }
 }
