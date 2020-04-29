@@ -205,6 +205,19 @@ public class JsonParser
     Collections.sort(notes_, NoteTitelSort);
   }
 
+  public Note getNote(int id)
+  {
+    for(Note item : notes_)
+    {
+      if (item.getId() == id)
+      {
+        return item;
+      }
+    }
+
+    return null;
+  }
+
   //Delete given note
   public void DeleteNote(Note note)
   {
