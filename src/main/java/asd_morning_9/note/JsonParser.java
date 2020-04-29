@@ -185,6 +185,38 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
+  
+  //Sort notes by Titel
+   public static Comparator<Note> NoteTitelSort = new Comparator<Note>() {
+
+    public int compare(Note n1, Note n2) {
+
+      String note1 = n1.getTitle();
+      String note2 = n2.getTitle();
+
+      /*For ascending order*/
+      return note1.compareTo(note2);
+
+    }
+  };
+
+  public  void SortNoteByTitel()
+  {
+    Collections.sort(notes_, NoteTitelSort);
+  }
+
+  public Note getNote(int id)
+  {
+    for(Note item : notes_)
+    {
+      if (item.getId() == id)
+      {
+        return item;
+      }
+    }
+
+    return null;
+  }
 
   //Delete given note
   public void DeleteNote(Note note)
@@ -227,4 +259,20 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
+  
+    //Filter notes
+    public void FilterNotesByTag(String tag)
+    {
+      try
+      {
+        notes_.removeIf(item -> !item.getTags().equals(tag));
+      }
+      catch (Exception e)
+      {
+        System.out.println("[ERROR IN FILTER NOTES] " + e.getMessage());
+      }
+    }
+    
+  
+  
 }
