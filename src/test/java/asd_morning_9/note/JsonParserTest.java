@@ -52,12 +52,14 @@ public class JsonParserTest
     ArrayList<Note> notes_;
     parser = new JsonParser(test_file);
     parser.ReadNotes(test_file);
+    Note tmp = parser.getNote(0);
     Note note = new Note(0, "Title", "content", "this is a tag");
-    parser.EditNote(0, "Title", note);
-    notes_ = parser.getNotesList();
-    assertEquals(expected_arr_size , notes_.size());
-    parser.DeleteNote(0);
+    parser.EditNote(0, "Title", tmp);
+    tmp.getTitle();
+    tmp.getContent();
+
     parser.SaveNotes();
+
   }
 
 
