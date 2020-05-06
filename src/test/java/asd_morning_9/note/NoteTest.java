@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
+/*
 public class NoteTest
 {
 
@@ -49,4 +51,4 @@ public class NoteTest
     assertEquals(title, note.getTitle());
     assertEquals(content, note.getContent());
   }
-}
+}*/

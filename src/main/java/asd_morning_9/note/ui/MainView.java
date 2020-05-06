@@ -55,18 +55,26 @@ public class MainView extends VerticalLayout
         title.setLabel("Title");
         title.setClassName("newNoteTitle");
 
+        TextArea tags = new TextArea("Tags");
+        tags.getStyle().set("height", "150px");
+        tags.setPlaceholder("");
+        tags.setClassName("newNoteTags");
+
         TextArea content = new TextArea("Content");
         content.getStyle().set("height", "150px");
         content.setPlaceholder("Write here ...");
         content.setClassName("newNoteContent");
 
         new_note_cont.add(title);
+        new_note_cont.add(tags);
         new_note_cont.add(content);
 
         add(new_note_cont);
 
         add(new Button("Save Note", event -> {
-            parser.AddNote(new Note(5, title.getValue(), content.getValue()));
+            String[] tagArray = tags.getValue().split(",");
+
+            parser.AddNote(new Note(5, title.getValue(), content.getValue(), tagArray[0]));
             parser.SaveNotes();
             Notification notification = new Notification(
             "Note was saved successfully!", 2000,

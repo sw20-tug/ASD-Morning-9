@@ -102,6 +102,7 @@ public class JsonParser
 
   public void ReadNotes()
   {
+    System.out.println("Test3");
     try
     {
       // parsing file "JSONExample.json"
@@ -114,21 +115,34 @@ public class JsonParser
       JSONArray ja = (JSONArray) jo.get("Notes");
 
       if (notes_ != null)
+        System.out.println("Test4");
         notes_.clear();
 
       Iterator itr = ja.iterator();
       while (itr.hasNext())
       {
+        System.out.println("Test5");
         JSONObject item = (JSONObject) itr.next();
 
         String id_string = JSONValue.toJSONString(item.get("id"));
         int id = Integer.parseInt(id_string);
 
+        System.out.println("Test6");
+
         String title = item.get("title").toString();
         String content = item.get("content").toString();
-        boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
-        notes_.add(new Note(id, title, content, completed));
+        String tags = item.get("tags").toString();
+        System.out.println("Test7");
+        boolean completed = Boolean.parseBoolean(item.get("completed").toString());
+        System.out.println(id);
+        System.out.println(title);
+        System.out.println(content);
+        System.out.println(tags);
+        System.out.println(completed);
+        System.out.println("Test8");
+        notes_.add(new Note(id, title, content, tags, completed));
+        System.out.println("Test9");
       }
     }
     catch (Exception e)

@@ -23,8 +23,9 @@ public class DashboardView extends VerticalLayout
   private JsonParser parser;
 
   public DashboardView() {
-
+    System.out.println("Test1");
     parser = new JsonParser();
+    System.out.println("Test2");
     parser.ReadNotes();
     //Note new_note = new Note(2, "new Title", "new Content");
     //parser.AddNote(new_note);
@@ -67,6 +68,9 @@ public class DashboardView extends VerticalLayout
 
 
       cont.add(head);
+      cont.add(item.getTags()); //new
+      cont.add(footer);
+      cont.add(head);
       cont.add(item.getContent());
       cont.add(footer);
       ListItem li = new ListItem(cont);
@@ -77,6 +81,7 @@ public class DashboardView extends VerticalLayout
     title.setLabel("Title");
     title.setPlaceholder("Search stored Note ...");
     title.setClassName("newNoteTitle");
+
 
     TextArea content = new TextArea("Content");
     content.getStyle().set("height", "150px");
