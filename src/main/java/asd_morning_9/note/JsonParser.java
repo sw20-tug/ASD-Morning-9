@@ -80,6 +80,11 @@ public class JsonParser
       item_obj.put("title", item.getTitle());
       item_obj.put("content", item.getContent());
       item_obj.put("tags", item.getTags());
+      item_obj.put("tags2", item.getTags2());
+      item_obj.put("tags3", item.getTags3());
+      item_obj.put("tags4", item.getTags4());
+      item_obj.put("tags5", item.getTags5());
+
       item_obj.put("completed", item.isCompleted());
       list.add(item_obj);
     }
@@ -102,7 +107,7 @@ public class JsonParser
 
   public void ReadNotes()
   {
-    System.out.println("Test3");
+
     try
     {
       // parsing file "JSONExample.json"
@@ -115,34 +120,34 @@ public class JsonParser
       JSONArray ja = (JSONArray) jo.get("Notes");
 
       if (notes_ != null)
-        System.out.println("Test4");
+
         notes_.clear();
 
       Iterator itr = ja.iterator();
       while (itr.hasNext())
       {
-        System.out.println("Test5");
+
         JSONObject item = (JSONObject) itr.next();
 
         String id_string = JSONValue.toJSONString(item.get("id"));
         int id = Integer.parseInt(id_string);
 
-        System.out.println("Test6");
+
 
         String title = item.get("title").toString();
         String content = item.get("content").toString();
 
         String tags = item.get("tags").toString();
-        System.out.println("Test7");
+        String tags2 = item.get("tags2").toString();
+        String tags3 = item.get("tags3").toString();
+        String tags4 = item.get("tags4").toString();
+        String tags5 = item.get("tags5").toString();
+
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
-        System.out.println(id);
-        System.out.println(title);
-        System.out.println(content);
-        System.out.println(tags);
-        System.out.println(completed);
-        System.out.println("Test8");
-        notes_.add(new Note(id, title, content, tags, completed));
-        System.out.println("Test9");
+
+
+        notes_.add(new Note(id, title, content, tags, tags2, tags3, tags4, tags5, completed));
+
       }
     }
     catch (Exception e)

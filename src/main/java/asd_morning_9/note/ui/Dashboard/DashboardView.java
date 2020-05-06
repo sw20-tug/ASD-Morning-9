@@ -23,9 +23,9 @@ public class DashboardView extends VerticalLayout
   private JsonParser parser;
 
   public DashboardView() {
-    System.out.println("Test1");
+
     parser = new JsonParser();
-    System.out.println("Test2");
+
     parser.ReadNotes();
     //Note new_note = new Note(2, "new Title", "new Content");
     //parser.AddNote(new_note);
@@ -66,10 +66,37 @@ public class DashboardView extends VerticalLayout
         notification.open();
       }));
 
+      if(item.getTags() != null)
+      {
+        cont.add(head);
+        cont.add(item.getTags()); //new
+        cont.add(footer);
+      }
+      if(item.getTags2() != null)
+      {
+        cont.add(head);
+        cont.add(item.getTags2()); //new
+        cont.add(footer);
+      }
+      if(item.getTags3() != null)
+      {
+        cont.add(head);
+        cont.add(item.getTags3()); //new
+        cont.add(footer);
+      }
+      if(item.getTags4() != null)
+      {
+        cont.add(head);
+        cont.add(item.getTags4()); //new
+        cont.add(footer);
+      }
+      if(item.getTags5() != null)
+      {
+        cont.add(head);
+        cont.add(item.getTags5()); //new
+        cont.add(footer);
+      }
 
-      cont.add(head);
-      cont.add(item.getTags()); //new
-      cont.add(footer);
       cont.add(head);
       cont.add(item.getContent());
       cont.add(footer);

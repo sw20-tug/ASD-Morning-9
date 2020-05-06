@@ -73,8 +73,47 @@ public class MainView extends VerticalLayout
 
         add(new Button("Save Note", event -> {
             String[] tagArray = tags.getValue().split(",");
+            //Problem: array kann im nachhinein nicht verändert werden
+            //Lösung: zweites Array mit fixer größe wo tagArray reingespeichert wird
+            System.out.println(tagArray.length);
 
-            parser.AddNote(new Note(5, title.getValue(), content.getValue(), tagArray[0]));
+            if(tagArray.length == 0)
+            {
+                tagArray[0] = "";
+                tagArray[1] = "";
+                tagArray[2] = "";
+                tagArray[3] = "";
+                tagArray[4] = "";
+            }
+            System.out.println("Teset1");
+            if(tagArray.length == 1)
+            {
+                System.out.println("Teset2");
+                tagArray[1] = "";
+                System.out.println("Teset3");
+                tagArray[2] = "";
+                tagArray[3] = "";
+                tagArray[4] = "";
+
+            }
+            System.out.println("Teset2");
+            if(tagArray.length == 2)
+            {
+                tagArray[2] = "";
+                tagArray[3] = "";
+                tagArray[4] = "";
+            }
+            if(tagArray.length == 3)
+            {
+                tagArray[3] = "";
+                tagArray[4] = "";
+            }
+            if(tagArray.length == 4)
+            {
+
+                tagArray[4] = "";
+            }
+            parser.AddNote(new Note(5, title.getValue(), content.getValue(), tagArray[0], tagArray[1], tagArray[2], tagArray[3], tagArray[4]));
             parser.SaveNotes();
             Notification notification = new Notification(
             "Note was saved successfully!", 2000,
