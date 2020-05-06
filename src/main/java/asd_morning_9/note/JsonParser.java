@@ -141,9 +141,10 @@ public class JsonParser
 
         String title = item.get("title").toString();
         String content = item.get("content").toString();
+        String tags = item.get("tags").toString();
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
-        notes_.add(new Note(id, title, content, completed));
+        notes_.add(new Note(id, title, content, tags, completed));
       }
     }
     catch (Exception e)
