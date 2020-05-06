@@ -57,6 +57,13 @@ public class Note
     return title;
   }
 
+  public String getTags()
+  {
+    return tags;
+  }
+
+  public boolean getCompleted() { return completed; }
+
   public void setId(int id) { this.id = id; }
 
   public void setTitle(String title)
@@ -72,11 +79,6 @@ public class Note
   public void setContent(String content)
   {
     this.content = content;
-  }
-
-  public String getTags()
-  {
-    return tags;
   }
 
   public void setTags(String tags)
