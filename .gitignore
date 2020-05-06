@@ -1,0 +1,10 @@
+node_modules/
+pom.xml
+target/
+.idea/
+.settings
+.project
+.classpath
+
+*.iml
+.DS_Store
