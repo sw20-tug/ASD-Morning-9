@@ -67,6 +67,21 @@ public class JsonParser
     //SaveNotes();
   }
 
+  public void EditNote(Note oldNote, Note newNote)
+  {
+    for(Note item : notes_)
+    {
+      if (item.getId() == oldNote.getId())
+      {
+        item.setTitle(newNote.getTitle());
+        item.setContent(newNote.getContent());
+        item.setTags(newNote.getTags());
+        item.setCompleted(newNote.getCompleted());
+        break;
+      }
+    }
+  }
+
   public void SaveNotes()
   {
     JSONObject obj = new JSONObject();
@@ -276,6 +291,11 @@ public class JsonParser
     
   private int getNewId()
   {
-    return notes_.get(notes_.size() - 1).getId() + 1;
+    if (notes_.size() > 0)
+    {
+      return notes_.get(notes_.size() - 1).getId() + 1;
+    }
+
+    return 0;
   }
 }
