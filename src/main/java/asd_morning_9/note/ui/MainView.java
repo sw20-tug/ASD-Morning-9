@@ -55,8 +55,10 @@ public class MainView extends VerticalLayout
         title.setLabel("Title");
         title.setClassName("newNoteTitle");
 
+
         TextField tags = new TextField();
         tags.setLabel("Tags");
+
         tags.setClassName("newNoteTags");
 
         TextArea content = new TextArea("Content");
@@ -71,6 +73,7 @@ public class MainView extends VerticalLayout
         add(new_note_cont);
 
         add(new Button("Save Note", event -> {
+
             parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
             parser.SaveNotes();
             Notification notification = new Notification(

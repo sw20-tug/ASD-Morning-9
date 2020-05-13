@@ -95,6 +95,7 @@ public class JsonParser
       item_obj.put("title", item.getTitle());
       item_obj.put("content", item.getContent());
       item_obj.put("tags", item.getTags());
+
       item_obj.put("completed", item.isCompleted());
       list.add(item_obj);
     }
@@ -117,6 +118,7 @@ public class JsonParser
 
   public void ReadNotes()
   {
+
     try
     {
       // parsing file "JSONExample.json"
@@ -129,22 +131,31 @@ public class JsonParser
       JSONArray ja = (JSONArray) jo.get("Notes");
 
       if (notes_ != null)
+
         notes_.clear();
 
       Iterator itr = ja.iterator();
       while (itr.hasNext())
       {
+
         JSONObject item = (JSONObject) itr.next();
 
         String id_string = JSONValue.toJSONString(item.get("id"));
         int id = Integer.parseInt(id_string);
 
+
+
         String title = item.get("title").toString();
         String content = item.get("content").toString();
+
         String tags = item.get("tags").toString();
+
+
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
+
         notes_.add(new Note(id, title, content, tags, completed));
+
       }
     }
     catch (Exception e)
