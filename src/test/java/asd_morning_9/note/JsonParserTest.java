@@ -205,10 +205,14 @@ public class JsonParserTest
     parser.AddNote(new Note(3, "Title3", "content3", "none"));
     parser.AddNote(new Note(4, "Title4", "content4", "important"));
     parser.AddNote(new Note(5, "Title5", "content5", "important"));
+    parser.AddNote(new Note(6, "Title6", "content6", "important,information"));
+    parser.AddNote(new Note(7, "Title7", "content7", "this,are,some,tags"));
+    parser.AddNote(new Note(8, "Title7", "content8", "this,are,some,tags"));
 
     parser.FilterNotesByTag("important");
+    //parser.FilterNotesByTag("this");
     notes_ = parser.getNotesList();
-    assertEquals(expected_arr_size+2, notes_.size());
+    assertEquals(expected_arr_size+3, notes_.size());
     assertEquals("important", notes_.get(0).getTags());
 
     deleteTestFile();
@@ -240,6 +244,7 @@ public class JsonParserTest
     assertEquals("LTitle",notes_.get(4).getTitle());
     deleteTestFile();
   }
+  
   
   @After
   public void tearDown()
