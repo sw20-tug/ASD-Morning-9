@@ -441,6 +441,29 @@ public class JsonParser
     return 0;
   }
 
+   public void markAsCompleted(int id)
+  {
+    try
+    {
+      int it;
+      for(it = 0; it < notes_.size(); it++)
+      {
+        Note item = notes_.get(it);
+
+        if (item.getId() == id)
+        {
+          item.setCompleted(true);
+          item.setDate_when_completed();
+          return;
+        }
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN MARK AS COMPLETED] " + e.getMessage());
+    }
+  }
+  
 
 }
 
