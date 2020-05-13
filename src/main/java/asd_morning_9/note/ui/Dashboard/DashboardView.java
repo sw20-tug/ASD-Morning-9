@@ -6,6 +6,8 @@ import asd_morning_9.note.ui.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -13,6 +15,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
+
+import java.util.ArrayList;
 //import org.graalvm.compiler.graph.Graph;
 
 @Route(value = "Dashboard", layout = MainLayout.class)
@@ -52,9 +56,10 @@ public class DashboardView extends VerticalLayout
       Header head = new Header();
       head.add(item.getTitle());
 
-      //li.addClassName(Integer.toString(item.getId()));
 
-      footer.add(new Button("Remove", event -> {
+      Icon trash = new Icon(VaadinIcon.TRASH);
+
+      footer.add(new Button(trash, event -> {
 
         parser.DeleteNote(item.getId());
         parser.SaveNotes();
@@ -66,11 +71,33 @@ public class DashboardView extends VerticalLayout
       }));
 
 
+      Icon star;
+      if (item.getPinned())
+      {
+         star = new Icon(VaadinIcon.STAR);
+      }
+      else
+      {
+        star = new Icon(VaadinIcon.STAR_O);
+      }
+
+      footer.add(new Button(star, event -> {
+        parser.PinNote(item.getId());
+        parser.SaveNotes();
+
+        Notification notification = new Notification(
+        "successfully pinned..", 2000,
+        Notification.Position.MIDDLE);
+        notification.open();
+      }));
+
+
       cont.add(head);
       cont.add(item.getContent());
       cont.add(item.getTags());
       cont.add(footer);
       ListItem li = new ListItem(cont);
+      li.addClassName(Integer.toString(item.getId()));
       ui.add(li);
     }
 
