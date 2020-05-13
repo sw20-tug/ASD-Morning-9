@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"Notes":[{"id":0,"completed":false,"title":"Article","content":"content 1","tags":"some, tags"},{"id":1,"completed":false,"title":"Some Things","content":"content 3","tags":"some, tag"},{"id":2,"completed":false,"title":"K_theme","content":"content 3","tags":"this,is,tag"}]}
+=======
+{"Notes":[{"pinned":true,"id":0,"completed":false,"title":"item 1","content":"","tags":""},{"pinned":true,"id":1,"completed":false,"title":"item 2","content":"","tags":""},{"pinned":true,"id":2,"completed":false,"title":"item 3","content":"","tags":""},{"pinned":true,"id":3,"completed":false,"title":"this is a new one","content":"","tags":""},{"pinned":false,"id":4,"completed":false,"title":"hdasiuohdiuoashnidsa","content":"","tags":""},{"pinned":true,"id":6,"completed":false,"title":"this is title","content":"conebnasd","tags":"tags"}]}
+>>>>>>> 521c35b20e09c93ee6471be2fd1e6e97cfe2d6d8

@@ -8,6 +8,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -15,6 +17,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
+
+import java.util.ArrayList;
 //import org.graalvm.compiler.graph.Graph;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
@@ -34,6 +38,7 @@ public class DashboardView extends VerticalLayout
   public DashboardView() {
 
     parser = new JsonParser();
+
     parser.ReadNotes();
     //Note new_note = new Note(2, "new Title", "new Content");
     //parser.AddNote(new_note);
@@ -61,15 +66,84 @@ public class DashboardView extends VerticalLayout
       Header head = new Header();
       head.add(item.getTitle());
 
-      //li.addClassName(Integer.toString(item.getId()));
 
-      footer.add(new Button("Remove", event -> {
+      Icon trash = new Icon(VaadinIcon.TRASH);
+
+      footer.add(new Button(trash, event -> {
 
         parser.DeleteNote(item.getId());
         parser.SaveNotes();
 
         Notification notification = new Notification(
         "successfully deleted..", 2000,
+        Notification.Position.MIDDLE);
+        notification.open();
+      }));
+      String[] bufferTagArray = item.getTags().split(",");
+      for(int i = 0; i< bufferTagArray.length; i++)
+      {
+        {
+          cont.add(head);
+          cont.add(bufferTagArray[i]); //new
+          cont.add("  ");
+          cont.add(footer);
+        }
+      }
+
+
+
+   /*   if(item.getTags() != "")
+      {
+        cont.add(head);
+        cont.add(item.getTags()); //new
+        cont.add("  ");
+        cont.add(footer);
+      }
+      /*
+      if(item.getTags2() != null)
+      {
+        cont.add(head);
+        cont.add(item.getTags2()); //new
+        cont.add("  ");
+        cont.add(footer);
+      }
+      if(item.getTags3() != " ")
+      {
+        cont.add(head);
+        cont.add(item.getTags3()); //new
+        cont.add("  ");
+        cont.add(footer);
+      }
+      if(item.getTags4() != "")
+      {
+        cont.add(head);
+        cont.add(item.getTags4()); //new
+        cont.add("  ");
+        cont.add(footer);
+      }
+      if(item.getTags5() != "")
+      {
+        cont.add(head);
+        cont.add(item.getTags5()); //new
+        cont.add(footer);
+      }*/
+
+      Icon star;
+      if (item.getPinned())
+      {
+         star = new Icon(VaadinIcon.STAR);
+      }
+      else
+      {
+        star = new Icon(VaadinIcon.STAR_O);
+      }
+
+      footer.add(new Button(star, event -> {
+        parser.PinNote(item.getId());
+        parser.SaveNotes();
+
+        Notification notification = new Notification(
+        "successfully pinned..", 2000,
         Notification.Position.MIDDLE);
         notification.open();
       }));
@@ -80,6 +154,7 @@ public class DashboardView extends VerticalLayout
       cont.add("Tag: " + item.getTags());
       cont.add(footer);
       ListItem li = new ListItem(cont);
+      li.addClassName(Integer.toString(item.getId()));
       ui.add(li);
 
       Div value = new Div();
@@ -109,6 +184,7 @@ public class DashboardView extends VerticalLayout
     title.setLabel("Title");
     title.setPlaceholder("Search stored Note ...");
     title.setClassName("newNoteTitle");
+
 
     TextArea content = new TextArea("Content");
     content.getStyle().set("height", "150px");
