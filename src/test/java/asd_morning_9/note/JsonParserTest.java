@@ -171,6 +171,33 @@ public class JsonParserTest
   }
 
   @Test
+  public void TagsTest()
+  {
+    createTestFile();
+
+    JsonParser parser;
+    ArrayList<Note> notes_;
+    parser = new JsonParser(test_file);
+    parser.ReadNotes(test_file);
+    parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
+    parser.SaveNotes();
+    parser.ReadNotes(test_file);
+    notes_ = parser.getNotesList();
+    String check = "";
+    String[] bufferTagArray = notes_.get(1).getTags().split(",");
+    for(int i=0; i < bufferTagArray.length; i++)
+    {
+      check = check.concat(bufferTagArray[i]);
+    }
+    assertEquals("thisaresometags", check);
+
+    parser.DeleteNote(0);
+    parser.SaveNotes();
+
+    deleteTestFile();
+  }
+
+  @Test
   public void GetNewIdTest()
   {
     createTestFile();
