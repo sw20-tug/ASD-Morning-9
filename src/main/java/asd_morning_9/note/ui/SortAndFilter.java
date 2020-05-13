@@ -52,7 +52,6 @@ public class SortAndFilter extends VerticalLayout {
             ui.add(li);
         }
 
-
         //Sort by title
         add(new Button("Sort notes by title", event -> {
             //TextField id = new TextField("id");
@@ -71,8 +70,9 @@ public class SortAndFilter extends VerticalLayout {
                 head.add(item.getTitle());
                 //li.addClassName(Integer.toString(item.getId()));
                 cont.add(head);
-                cont.add(item.getContent());
-                cont.add(item.getTags());
+                cont.add("Content: " + item.getContent());
+                cont.add(br);
+                cont.add("Tag: " + item.getTags());
                 cont.add(footer);
                 ListItem li = new ListItem(cont);
                 ui_.add(li);
@@ -114,8 +114,9 @@ public class SortAndFilter extends VerticalLayout {
                 head.add(item.getTitle());
                 //li.addClassName(Integer.toString(item.getId()));
                 cont.add(head);
-                cont.add(item.getContent());
-                cont.add(item.getTags());
+                cont.add("Content: " + item.getContent());
+                cont.add(br);
+                cont.add("Tag: " + item.getTags());
                 cont.add(footer);
                 ListItem li = new ListItem(cont);
                 ui_.add(li);
@@ -127,16 +128,6 @@ public class SortAndFilter extends VerticalLayout {
                     Notification.Position.MIDDLE);
             notification.open();
         }));
-
-
-
-
-
-
-
         add(ui);
-
     }
-
-
 }
