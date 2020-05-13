@@ -65,37 +65,54 @@ public class DashboardView extends VerticalLayout
         Notification.Position.MIDDLE);
         notification.open();
       }));
+      String[] bufferTagArray = item.getTags().split(",");
+      for(int i = 0; i< bufferTagArray.length; i++)
+      {
+        {
+          cont.add(head);
+          cont.add(bufferTagArray[i]); //new
+          cont.add("  ");
+          cont.add(footer);
+        }
+      }
 
-      if(item.getTags() != null)
+
+
+   /*   if(item.getTags() != "")
       {
         cont.add(head);
         cont.add(item.getTags()); //new
+        cont.add("  ");
         cont.add(footer);
       }
+      /*
       if(item.getTags2() != null)
       {
         cont.add(head);
         cont.add(item.getTags2()); //new
+        cont.add("  ");
         cont.add(footer);
       }
-      if(item.getTags3() != null)
+      if(item.getTags3() != " ")
       {
         cont.add(head);
         cont.add(item.getTags3()); //new
+        cont.add("  ");
         cont.add(footer);
       }
-      if(item.getTags4() != null)
+      if(item.getTags4() != "")
       {
         cont.add(head);
         cont.add(item.getTags4()); //new
+        cont.add("  ");
         cont.add(footer);
       }
-      if(item.getTags5() != null)
+      if(item.getTags5() != "")
       {
         cont.add(head);
         cont.add(item.getTags5()); //new
         cont.add(footer);
-      }
+      }*/
 
       cont.add(head);
       cont.add(item.getContent());

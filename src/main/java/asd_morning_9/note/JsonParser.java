@@ -80,10 +80,6 @@ public class JsonParser
       item_obj.put("title", item.getTitle());
       item_obj.put("content", item.getContent());
       item_obj.put("tags", item.getTags());
-      item_obj.put("tags2", item.getTags2());
-      item_obj.put("tags3", item.getTags3());
-      item_obj.put("tags4", item.getTags4());
-      item_obj.put("tags5", item.getTags5());
 
       item_obj.put("completed", item.isCompleted());
       list.add(item_obj);
@@ -138,15 +134,12 @@ public class JsonParser
         String content = item.get("content").toString();
 
         String tags = item.get("tags").toString();
-        String tags2 = item.get("tags2").toString();
-        String tags3 = item.get("tags3").toString();
-        String tags4 = item.get("tags4").toString();
-        String tags5 = item.get("tags5").toString();
+
 
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
 
-        notes_.add(new Note(id, title, content, tags, tags2, tags3, tags4, tags5, completed));
+        notes_.add(new Note(id, title, content, tags, completed));
 
       }
     }
