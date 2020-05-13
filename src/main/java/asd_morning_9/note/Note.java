@@ -47,6 +47,16 @@ public class Note
 
 
 
+  public Note(int id, String title, String content, String tags, Boolean completed, Boolean pinned)
+  {
+    this.id = id;
+    this.title = title;
+    this.content = content;
+    this.tags = tags;
+    this.completed = completed;
+    this.pinned = pinned;
+  }
+
   /*public Note(String value, String value1) { //hab die erste Instanz entfernt
   }*/
 

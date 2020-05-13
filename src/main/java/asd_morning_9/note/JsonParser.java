@@ -24,7 +24,24 @@ public class JsonParser
 
   public ArrayList<Note> getNotesList()
   {
-    return notes_;
+    ArrayList<Note> list = new ArrayList<>();
+    for (Note item : notes_)
+    {
+      if (item.getPinned())
+      {
+        list.add(item);
+      }
+    }
+
+    for (Note item : notes_)
+    {
+      if (!item.getPinned())
+      {
+        list.add(item);
+      }
+    }
+
+    return list;
   }
 
   // Instantiate default
@@ -39,6 +56,32 @@ public class JsonParser
   {
     notes_ = new ArrayList<>();
     this.conf_file = conf_file;
+  }
+
+  public void PinNote (int id)
+  {
+    try
+    {
+      for(Note item : notes_)
+      {
+        if (item.getId() == id)
+        {
+          if (item.getPinned())
+          {
+            item.setPinned(false);
+          }
+          else
+          {
+            item.setPinned(true);
+          }
+          return;
+        }
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN PINNING NOTE] " + e.getMessage());
+    }
   }
 
   public void AddNote(Note note)
@@ -97,6 +140,7 @@ public class JsonParser
       item_obj.put("tags", item.getTags());
 
       item_obj.put("completed", item.isCompleted());
+      item_obj.put("pinned", item.getPinned());
       list.add(item_obj);
     }
 
@@ -149,13 +193,10 @@ public class JsonParser
         String content = item.get("content").toString();
 
         String tags = item.get("tags").toString();
-
-
+        Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
-
-        notes_.add(new Note(id, title, content, tags, completed));
-
+        notes_.add(new Note(id, title, content, tags, completed, pinned));
       }
     }
     catch (Exception e)
