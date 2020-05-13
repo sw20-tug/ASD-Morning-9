@@ -55,9 +55,10 @@ public class MainView extends VerticalLayout
         title.setLabel("Title");
         title.setClassName("newNoteTitle");
 
-        TextArea tags = new TextArea("Tags");
-        tags.getStyle().set("height", "150px");
-        tags.setPlaceholder("");
+
+        TextField tags = new TextField();
+        tags.setLabel("Tags");
+
         tags.setClassName("newNoteTags");
 
         TextArea content = new TextArea("Content");
@@ -72,71 +73,7 @@ public class MainView extends VerticalLayout
         add(new_note_cont);
 
         add(new Button("Save Note", event -> {
-/*            String[] bufferTagArray = tags.getValue().split(",");
-            //Problem: array kann im nachhinein nicht verändert werden
-            //Lösung: zweites Array mit fixer größe wo tagArray reingespeichert wird
-            String[] tagArray = {" "," "," "," "," "};
 
-            if(bufferTagArray.length == 0)
-            {
-
-                tagArray[0] = "";
-                tagArray[1] = "";
-                tagArray[2] = "";
-                tagArray[3] = "";
-                tagArray[4] = "";
-            }
-            System.out.println("Teset1");
-            if(bufferTagArray.length == 1)
-            {
-                tagArray[0] = bufferTagArray[0];
-                tagArray[1] = "";
-                tagArray[2] = "";
-                tagArray[3] = "";
-                tagArray[4] = "";
-
-            }
-            System.out.println("Teset2");
-            if(bufferTagArray.length == 2)
-            {
-                tagArray[0] = bufferTagArray[0];
-                tagArray[1] = bufferTagArray[1];
-                tagArray[2] = "";
-                tagArray[3] = "";
-                tagArray[4] = "";
-            }
-            if(bufferTagArray.length == 3)
-            {
-                tagArray[0] = bufferTagArray[0];
-                tagArray[1] = bufferTagArray[1];
-                tagArray[2] = bufferTagArray[2];
-                tagArray[3] = "";
-                tagArray[4] = "";
-            }
-            if(bufferTagArray.length == 4)
-            {
-                tagArray[0] = bufferTagArray[0];
-                tagArray[1] = bufferTagArray[1];
-                tagArray[2] = bufferTagArray[2];
-                tagArray[3] = bufferTagArray[3];
-                tagArray[4] = "";
-            }
-            if(bufferTagArray.length == 5)
-            {
-                tagArray[0] = bufferTagArray[0];
-                tagArray[1] = bufferTagArray[1];
-                tagArray[2] = bufferTagArray[2];
-                tagArray[3] = bufferTagArray[3];
-                tagArray[4] = bufferTagArray[4];
-            }
-            if(bufferTagArray.length > 5)
-            {
-                Notification notification = new Notification(
-                        "Too many Tags!", 2000,
-                        Notification.Position.MIDDLE);
-                        notification.open();
-                
-            }*/
             parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
             parser.SaveNotes();
             Notification notification = new Notification(

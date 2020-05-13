@@ -8,3 +8,5 @@ target/
 
 *.iml
 .DS_Store
+config.json
+src/test/java/asd_morning_9/note/config_test.json

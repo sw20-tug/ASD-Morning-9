@@ -116,6 +116,7 @@ public class DashboardView extends VerticalLayout
 
       cont.add(head);
       cont.add(item.getContent());
+      cont.add(item.getTags());
       cont.add(footer);
       ListItem li = new ListItem(cont);
       ui.add(li);

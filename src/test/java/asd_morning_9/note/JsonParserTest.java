@@ -104,7 +104,7 @@ public class JsonParserTest
         deleteTestFile();
     }
 
-/*
+
     @Test
     public void EditNoteTest()
     {
@@ -130,7 +130,7 @@ public class JsonParserTest
         assertEquals(oldNote.getCompleted(), newNote.getCompleted());
 
         deleteTestFile();
-    }*/
+    }
 
 
     @Test
