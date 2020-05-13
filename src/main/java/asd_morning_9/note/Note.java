@@ -36,13 +36,16 @@ public class Note
   }
 
   public Note(int id, String title, String content, String tags, Boolean completed)
-  {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.tags = tags;
-    this.completed = completed;
-  }
+{
+  this.id = id;
+  this.title = title;
+  this.content = content;
+  this.tags = tags;
+  this.completed = completed;
+}
+
+
+
 
   public Note(int id, String title, String content, String tags, Boolean completed, Boolean pinned)
   {
