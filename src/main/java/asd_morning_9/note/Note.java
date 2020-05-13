@@ -7,6 +7,7 @@ public class Note
   private String content;
   private String tags;
   private boolean completed;
+  private boolean pinned;
 
   public Note(int id, String title, String content, String tags)
   {
@@ -108,4 +109,10 @@ public class Note
   {
     this.completed = completed;
   }
+
+  public void setPinned(boolean pinned){this.pinned = pinned;}
+
+  public boolean getPinned(){return this.pinned;}
+
+
 }

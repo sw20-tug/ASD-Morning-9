@@ -39,7 +39,7 @@ public class JsonParserTest
         JSONObject obj = new JSONObject();
         JSONArray list = new JSONArray();
 
-        Note item = new Note(0, "This is a test title.", "This content is a very short test.", "few,tags,should,be,here", false);
+        Note item = new Note(0, "This is a test title.", "This content is a very short test.", "few,tags,should,be,here", false, false);
 
         JSONObject item_obj = new JSONObject();
         item_obj.put("id", item.getId());
@@ -47,6 +47,7 @@ public class JsonParserTest
         item_obj.put("content", item.getContent());
         item_obj.put("tags", item.getTags());
         item_obj.put("completed", item.isCompleted());
+        item_obj.put("pinned", item.getPinned());
         list.add(item_obj);
 
         obj.put("Notes", list);
@@ -68,7 +69,10 @@ public class JsonParserTest
     private void deleteTestFile()
     {
         if (!fileExists(test_file))
-            deleteTestFile();
+            return;
+
+        File f= new File(test_file);
+        f.delete();
     }
 
     @Test
