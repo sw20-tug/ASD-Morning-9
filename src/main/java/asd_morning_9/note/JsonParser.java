@@ -453,7 +453,7 @@ public class JsonParser
         if (item.getId() == id)
         {
           item.setCompleted(true);
-          item.setDate_when_completed();
+          //item.setDate_when_completed();
           return;
         }
       }
