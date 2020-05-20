@@ -1,27 +1,17 @@
 package asd_morning_9.note;
 
-import elemental.json.Json;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Map;
-import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
 
 import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.*;
 
 
 public class JsonParser
@@ -109,12 +99,12 @@ public class JsonParser
     notes_.add(note);
   }
 
-  public void EditNote (int id, String title, Note note)
+  public void EditNote (int id, String title, String note)
   {
     boolean check;
     for (Note item : notes_)
     {
-      if (item.getTitle().equals(note.getTitle()))
+      if (item.getTitle().equals(title))
       {
         //item.setContent(content);
         //item.setCompleted(completed);
@@ -122,7 +112,8 @@ public class JsonParser
         int x;
         x = item.getId();
         //notes_.set(x, note);
-        item.setContent(note.getContent());
+        item.setContent(note);
+        SaveNotes();
         break;
       }
     }
