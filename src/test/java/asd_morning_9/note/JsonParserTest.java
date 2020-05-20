@@ -327,26 +327,7 @@ public class JsonParserTest
 
       deleteTestFile();
     }
-  
-  
-    @Test
-    public void ShareNotesTest()
-    {
-        createTestFile();
-
-        JsonParser parser;
-        ArrayList<Note> notes_;
-        parser = new JsonParser(test_file);
-        parser.ReadNotes(test_file);
-        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
-        parser.AddNote(new Note(1, "Title1", "content1", "this,are,some,tags1"));
-
-        parser.ShareNote("test.usertug12@gmail.com", "test.usertug1234@gmail.com", "test.usertug12", "test.user1234");
-        notes_ = parser.getNotesList();
-        assertEquals(expected_arr_size + 2, notes_.size());
-
-        deleteTestFile();
-    }
+ 
     
    @Test
   public void MarkAsCompletedTest()
