@@ -340,7 +340,6 @@ public class JsonParserTest
 
     deleteTestFile();
   }
-
     
     @After
     public void tearDown()
