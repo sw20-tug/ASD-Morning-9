@@ -278,6 +278,51 @@ public class JsonParser
     }
   }
 
+  public void ImportNotes(String file)
+  {
+    System.out.println(file);
+    try
+    {
+      // parsing file "JSONExample.json"
+      Object obj = new JSONParser().parse(new FileReader(file));
+
+      // typecasting obj to JSONObject
+      JSONObject jo = (JSONObject) obj;
+
+      // getting notes
+      JSONArray ja = (JSONArray) jo.get("Notes");
+
+      if (notes_ != null)
+
+        notes_.clear();
+
+      Iterator itr = ja.iterator();
+      while (itr.hasNext())
+      {
+
+        JSONObject item = (JSONObject) itr.next();
+
+        String id_string = JSONValue.toJSONString(item.get("id"));
+        int id = Integer.parseInt(id_string);
+
+
+
+        String title = item.get("title").toString();
+        String content = item.get("content").toString();
+
+        String tags = item.get("tags").toString();
+        Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
+        boolean completed = Boolean.parseBoolean(item.get("completed").toString());
+
+        notes_.add(new Note(id, title, content, tags, completed, pinned));
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN READ NOTES] " + e.getMessage());
+    }
+  }
+
   // Delete note with specific id
   public void DeleteNote(int id)
   {

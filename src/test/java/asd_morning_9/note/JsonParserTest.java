@@ -194,6 +194,21 @@ public class JsonParserTest
 
         deleteTestFile();
     }
+    @Test
+    public void ImportNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        boolean result = parser.ReadNotes(test_file);
+        notes_ = parser.getNotesList();
+        assertTrue(result);
+        assertEquals(expected_arr_size, notes_.size());
+
+        deleteTestFile();
+    }
 
     @Test
     public void GetNewIdTest()
