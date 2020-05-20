@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"Notes":[{"pinned":true,"id":0,"completed":false,"title":"New Note","content":"This is a content","tags":"tag"},{"pinned":false,"id":1,"completed":false,"title":"note 2","content":"Content 2","tags":"tag2"}]}
+=======
+{"Notes":[{"pinned":false,"id":0,"completed":false,"title":"new","content":"ball","tags":"new"}]}
+>>>>>>> 893128a0d6802d838eba18cbfbadcccfb87846a9
