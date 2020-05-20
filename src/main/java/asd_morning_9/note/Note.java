@@ -7,6 +7,7 @@ public class Note
   private String content;
   private String tags;
   private boolean completed;
+  private boolean pinned;
 
   public Note(int id, String title, String content, String tags)
   {
@@ -36,12 +37,25 @@ public class Note
   }
 
   public Note(int id, String title, String content, String tags, Boolean completed)
+{
+  this.id = id;
+  this.title = title;
+  this.content = content;
+  this.tags = tags;
+  this.completed = completed;
+}
+
+
+
+
+  public Note(int id, String title, String content, String tags, Boolean completed, Boolean pinned)
   {
     this.id = id;
     this.title = title;
     this.content = content;
     this.tags = tags;
     this.completed = completed;
+    this.pinned = pinned;
   }
 
   /*public Note(String value, String value1) { //hab die erste Instanz entfernt
@@ -95,4 +109,10 @@ public class Note
   {
     this.completed = completed;
   }
+
+  public void setPinned(boolean pinned){this.pinned = pinned;}
+
+  public boolean getPinned(){return this.pinned;}
+
+
 }

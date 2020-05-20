@@ -17,15 +17,51 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.*;
 
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+import javax.mail.Session;
+import javax.mail.Transport;
+
+
 public class JsonParser
 {
   private String conf_file;
   private ArrayList<Note> notes_;
+  private ArrayList<Integer> selected_notes = new ArrayList<>();
 
   public ArrayList<Note> getNotesList()
   {
-    return notes_;
+    ArrayList<Note> list = new ArrayList<>();
+    for (Note item : notes_)
+    {
+      if (item.getPinned())
+      {
+        list.add(item);
+      }
+    }
+
+    for (Note item : notes_)
+    {
+      if (!item.getPinned())
+      {
+        list.add(item);
+      }
+    }
+
+    return list;
   }
+  /*public ArrayList<Note> getCheckedNotesList()
+  {
+    return selected_notes;
+  }
+  */
+
+  public void addId (int id) {
+
+    selected_notes.add(id);
+  }
+
 
   // Instantiate default
   public JsonParser()
@@ -39,6 +75,32 @@ public class JsonParser
   {
     notes_ = new ArrayList<>();
     this.conf_file = conf_file;
+  }
+
+  public void PinNote (int id)
+  {
+    try
+    {
+      for(Note item : notes_)
+      {
+        if (item.getId() == id)
+        {
+          if (item.getPinned())
+          {
+            item.setPinned(false);
+          }
+          else
+          {
+            item.setPinned(true);
+          }
+          return;
+        }
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN PINNING NOTE] " + e.getMessage());
+    }
   }
 
   public void AddNote(Note note)
@@ -95,7 +157,9 @@ public class JsonParser
       item_obj.put("title", item.getTitle());
       item_obj.put("content", item.getContent());
       item_obj.put("tags", item.getTags());
+
       item_obj.put("completed", item.isCompleted());
+      item_obj.put("pinned", item.getPinned());
       list.add(item_obj);
     }
 
@@ -117,6 +181,7 @@ public class JsonParser
 
   public void ReadNotes()
   {
+
     try
     {
       // parsing file "JSONExample.json"
@@ -129,22 +194,28 @@ public class JsonParser
       JSONArray ja = (JSONArray) jo.get("Notes");
 
       if (notes_ != null)
+
         notes_.clear();
 
       Iterator itr = ja.iterator();
       while (itr.hasNext())
       {
+
         JSONObject item = (JSONObject) itr.next();
 
         String id_string = JSONValue.toJSONString(item.get("id"));
         int id = Integer.parseInt(id_string);
 
+
+
         String title = item.get("title").toString();
         String content = item.get("content").toString();
+
         String tags = item.get("tags").toString();
+        Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
-        notes_.add(new Note(id, title, content, tags, completed));
+        notes_.add(new Note(id, title, content, tags, completed, pinned));
       }
     }
     catch (Exception e)
@@ -282,12 +353,82 @@ public class JsonParser
   {
     try
     {
-      notes_.removeIf(item -> !item.getTags().equals(tag));
+      notes_.removeIf(item -> !item.getTags().contains(tag));
+      //notes_.removeIf(item -> !item.getTags().equals(tag));
+
     }
     catch (Exception e)
     {
       System.out.println("[ERROR IN FILTER NOTES] " + e.getMessage());
     }
+  }
+
+
+  public void ShareNote(String sender_email, String recipient_email,final String username,
+          final String password)
+  {
+    ArrayList<Note> inverse = new ArrayList<>();
+    String text_mes = new String();
+  try {
+    for (int i : selected_notes)
+    {
+      System.out.println(selected_notes.size());
+      for(Note item : notes_)
+      {
+        //System.out.println(item.getId());
+        System.out.println("notes_"+i);
+
+        if (item.getId() == i)
+        {
+          text_mes = text_mes.concat(item.getTitle()).concat("\n\n").concat(item.getContent()).concat("\n\n").concat("-------------------").concat("\n");
+
+        }
+      }
+    }
+  }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR NO NOTE SELECTED TO SHARE] " + e.getMessage());
+    }
+    final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+    // Get a Properties object
+    Properties props = System.getProperties();
+    props.setProperty("mail.smtp.host", "smtp.gmail.com");
+    props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+    props.setProperty("mail.smtp.socketFactory.fallback", "false");
+    props.setProperty("mail.smtp.port", "465");
+    props.setProperty("mail.smtp.socketFactory.port", "465");
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.debug", "true");
+    props.put("mail.store.protocol", "pop3");
+    props.put("mail.transport.protocol", "smtp");
+    // creating session object to get properties
+
+    try{
+        Session session = Session.getDefaultInstance(props,
+                new Authenticator(){
+                  protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                  }});
+
+        // -- Create a new message --
+        Message msg = new MimeMessage(session);
+
+        // -- Set the FROM and TO fields --
+        msg.setFrom(new InternetAddress(sender_email));
+        msg.setRecipients(Message.RecipientType.TO,
+                InternetAddress.parse(recipient_email,false));
+
+        msg.setSubject("Shared Notes");
+        msg.setText(text_mes);
+        msg.setSentDate(new Date());
+        Transport.send(msg);
+
+        System.out.println("Message sent.");
+
+
+      }catch (MessagingException e){ System.out.println("ERROR: " + e);}
+
   }
     
   private int getNewId()
@@ -299,4 +440,7 @@ public class JsonParser
 
     return 0;
   }
+
+
 }
+
