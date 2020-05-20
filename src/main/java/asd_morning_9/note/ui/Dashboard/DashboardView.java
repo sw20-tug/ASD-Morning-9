@@ -189,6 +189,7 @@ public class DashboardView extends VerticalLayout
 
     add(share_note_cont);
 
+
     add(new Button("Share Note", event -> {
 
       parser.ShareNote(emailField_sender.getValue(),emailField_recipient.getValue(),user_name.getValue(),passwordField.getValue());
@@ -201,6 +202,25 @@ public class DashboardView extends VerticalLayout
 
     }));
 
+    Div export_note_cont = new Div();
+
+    TextField path = new TextField("Export path");
+    export_note_cont.add(path);
+
+    add(export_note_cont);
+
+    add(new Button("Export", event -> {
+
+      path.setValue(path.getValue() + ".json");
+      parser.SaveNotes(path.getValue());
+      //TextField id = new TextField("id");
+      //parser.SaveNotes();
+      Notification notification = new Notification(
+              "Note was exported successfully!", 2000,
+              Notification.Position.MIDDLE);
+      notification.open();
+
+    }));
     add(ui);
 
 
