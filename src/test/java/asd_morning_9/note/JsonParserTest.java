@@ -309,6 +309,7 @@ public class JsonParserTest
     }
   
   @Test
+   @Test
   public void MarkAsCompletedTest()
   {
     createTestFile();
@@ -332,7 +333,13 @@ public class JsonParserTest
     assertEquals(true, notes_.get(2).getCompleted());
     assertEquals(true, notes_.get(3).getCompleted());
 
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
+    String date_when_completed = simpleDateFormat.format(notes_.get(1).getDate_when_completed());
+    String str_today_day = simpleDateFormat.format(new Date());
+
+    assertEquals(str_today_day, date_when_completed);
     deleteTestFile();
   }
 
