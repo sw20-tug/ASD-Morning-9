@@ -179,6 +179,42 @@ public class JsonParser
     }
   }
 
+  // Save to a specific file
+  public void SaveNotes(String path)
+  {
+    JSONObject obj = new JSONObject();
+
+    JSONArray list = new JSONArray();
+
+    for (Note item : notes_)
+    {
+      JSONObject item_obj = new JSONObject();
+      item_obj.put("id", item.getId());
+      item_obj.put("title", item.getTitle());
+      item_obj.put("content", item.getContent());
+      item_obj.put("tags", item.getTags());
+
+      item_obj.put("completed", item.isCompleted());
+      item_obj.put("pinned", item.getPinned());
+      list.add(item_obj);
+    }
+
+    obj.put("Notes", list);
+
+    try
+    {
+      FileWriter file = new FileWriter(path);
+      String string = obj.toJSONString();
+      file.write(string);
+      file.flush();
+      file.close();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+
   public void ReadNotes()
   {
 
