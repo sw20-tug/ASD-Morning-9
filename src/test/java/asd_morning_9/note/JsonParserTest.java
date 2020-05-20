@@ -194,6 +194,21 @@ public class JsonParserTest
 
         deleteTestFile();
     }
+    @Test
+    public void ImportNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        boolean result = parser.ReadNotes(test_file);
+        notes_ = parser.getNotesList();
+        assertTrue(result);
+        assertEquals(expected_arr_size, notes_.size());
+
+        deleteTestFile();
+    }
 
     @Test
     public void GetNewIdTest()
@@ -314,6 +329,7 @@ public class JsonParserTest
     }
   
   @Test
+   @Test
   public void MarkAsCompletedTest()
   {
     createTestFile();
@@ -337,7 +353,13 @@ public class JsonParserTest
     assertEquals(true, notes_.get(2).getCompleted());
     assertEquals(true, notes_.get(3).getCompleted());
 
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
+    String date_when_completed = simpleDateFormat.format(notes_.get(1).getDate_when_completed());
+    String str_today_day = simpleDateFormat.format(new Date());
+
+    assertEquals(str_today_day, date_when_completed);
     deleteTestFile();
   }
     
