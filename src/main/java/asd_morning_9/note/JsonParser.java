@@ -135,7 +135,7 @@ public class JsonParser
     }
   }
 
-  public void SaveNotes()
+   public void SaveNotes()
   {
     JSONObject obj = new JSONObject();
 
@@ -148,10 +148,13 @@ public class JsonParser
       item_obj.put("title", item.getTitle());
       item_obj.put("content", item.getContent());
       item_obj.put("tags", item.getTags());
-
       item_obj.put("completed", item.isCompleted());
       item_obj.put("pinned", item.getPinned());
       list.add(item_obj);
+
+      if (item.getDate_when_completed() != null)
+    item_obj.put("date_when_completed", item.getDate_when_completed());
+
     }
 
     obj.put("Notes", list);
@@ -184,10 +187,13 @@ public class JsonParser
       item_obj.put("title", item.getTitle());
       item_obj.put("content", item.getContent());
       item_obj.put("tags", item.getTags());
-
       item_obj.put("completed", item.isCompleted());
       item_obj.put("pinned", item.getPinned());
       list.add(item_obj);
+
+      if (item.getDate_when_completed() != null)
+        item_obj.put("date_when_completed", item.getDate_when_completed());
+
     }
 
     obj.put("Notes", list);
@@ -233,8 +239,6 @@ public class JsonParser
         String id_string = JSONValue.toJSONString(item.get("id"));
         int id = Integer.parseInt(id_string);
 
-
-
         String title = item.get("title").toString();
         String content = item.get("content").toString();
 
@@ -242,7 +246,15 @@ public class JsonParser
         Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
-        notes_.add(new Note(id, title, content, tags, completed, pinned));
+        if (item.get("date_when_completed") != null) {
+          String str_date_when_completed = JSONValue.toJSONString(item.get("date_when_completed"));
+
+          DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+          Date date_when_completed = dateFormat.parse(str_date_when_completed);
+          notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_completed));
+        }
+        else notes_.add(new Note(id, title, content, tags, completed, pinned));
+
       }
     }
     catch (Exception e)
