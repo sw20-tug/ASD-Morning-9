@@ -1,27 +1,17 @@
 package asd_morning_9.note;
 
-import elemental.json.Json;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Map;
-import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
 
 import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.*;
 
 
 public class JsonParser
@@ -109,12 +99,12 @@ public class JsonParser
     notes_.add(note);
   }
 
-  public void EditNote (int id, String title, Note note)
+  public void EditNote (int id, String title, String note)
   {
     boolean check;
     for (Note item : notes_)
     {
-      if (item.getTitle().equals(note.getTitle()))
+      if (item.getTitle().equals(title))
       {
         //item.setContent(content);
         //item.setCompleted(completed);
@@ -122,7 +112,8 @@ public class JsonParser
         int x;
         x = item.getId();
         //notes_.set(x, note);
-        item.setContent(note.getContent());
+        item.setContent(note);
+        SaveNotes();
         break;
       }
     }
@@ -168,6 +159,42 @@ public class JsonParser
     try
     {
       FileWriter file = new FileWriter(conf_file);
+      String string = obj.toJSONString();
+      file.write(string);
+      file.flush();
+      file.close();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  // Save to a specific file
+  public void SaveNotes(String path)
+  {
+    JSONObject obj = new JSONObject();
+
+    JSONArray list = new JSONArray();
+
+    for (Note item : notes_)
+    {
+      JSONObject item_obj = new JSONObject();
+      item_obj.put("id", item.getId());
+      item_obj.put("title", item.getTitle());
+      item_obj.put("content", item.getContent());
+      item_obj.put("tags", item.getTags());
+
+      item_obj.put("completed", item.isCompleted());
+      item_obj.put("pinned", item.getPinned());
+      list.add(item_obj);
+    }
+
+    obj.put("Notes", list);
+
+    try
+    {
+      FileWriter file = new FileWriter(path);
       String string = obj.toJSONString();
       file.write(string);
       file.flush();
@@ -248,6 +275,51 @@ public class JsonParser
     {
       System.out.println("[ERROR IN READ NOTES] " + e.getMessage());
       return false;
+    }
+  }
+
+  public void ImportNotes(String file)
+  {
+    System.out.println(file);
+    try
+    {
+      // parsing file "JSONExample.json"
+      Object obj = new JSONParser().parse(new FileReader(file));
+
+      // typecasting obj to JSONObject
+      JSONObject jo = (JSONObject) obj;
+
+      // getting notes
+      JSONArray ja = (JSONArray) jo.get("Notes");
+
+      if (notes_ != null)
+
+        notes_.clear();
+
+      Iterator itr = ja.iterator();
+      while (itr.hasNext())
+      {
+
+        JSONObject item = (JSONObject) itr.next();
+
+        String id_string = JSONValue.toJSONString(item.get("id"));
+        int id = Integer.parseInt(id_string);
+
+
+
+        String title = item.get("title").toString();
+        String content = item.get("content").toString();
+
+        String tags = item.get("tags").toString();
+        Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
+        boolean completed = Boolean.parseBoolean(item.get("completed").toString());
+
+        notes_.add(new Note(id, title, content, tags, completed, pinned));
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN READ NOTES] " + e.getMessage());
     }
   }
 

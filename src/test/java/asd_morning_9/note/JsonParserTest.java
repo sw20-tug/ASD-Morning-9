@@ -175,6 +175,42 @@ public class JsonParserTest
     }
 
     @Test
+    public void ExportNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        parser.ReadNotes(test_file);
+        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
+        parser.SaveNotes(test_file);
+        parser.ReadNotes(test_file);
+        notes_ = parser.getNotesList();
+        assertEquals(expected_arr_size + 1, notes_.size());
+
+        parser.DeleteNote(0);
+        parser.SaveNotes();
+
+        deleteTestFile();
+    }
+    @Test
+    public void ImportNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        boolean result = parser.ReadNotes(test_file);
+        notes_ = parser.getNotesList();
+        assertTrue(result);
+        assertEquals(expected_arr_size, notes_.size());
+
+        deleteTestFile();
+    }
+
+    @Test
     public void GetNewIdTest()
     {
         createTestFile();
