@@ -1,5 +1,4 @@
 node_modules/
-pom.xml
 target/
 .idea/
 .settings

@@ -175,6 +175,27 @@ public class JsonParserTest
     }
 
     @Test
+    public void ExportNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        parser.ReadNotes(test_file);
+        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
+        parser.SaveNotes(test_file);
+        parser.ReadNotes(test_file);
+        notes_ = parser.getNotesList();
+        assertEquals(expected_arr_size + 1, notes_.size());
+
+        parser.DeleteNote(0);
+        parser.SaveNotes();
+
+        deleteTestFile();
+    }
+
+    @Test
     public void GetNewIdTest()
     {
         createTestFile();
@@ -272,6 +293,35 @@ public class JsonParserTest
       deleteTestFile();
     }
   
+  @Test
+  public void MarkAsCompletedTest()
+  {
+    createTestFile();
+
+    JsonParser parser;
+    ArrayList<Note> notes_;
+    parser = new JsonParser(test_file);
+    parser.ReadNotes(test_file);
+
+    parser.AddNote(new Note(1, "Title1", "content1", "none"));
+    parser.AddNote(new Note(2, "Title2", "content2", "important", true));
+    parser.AddNote(new Note(3, "Title3", "content3", "none", false));
+
+    parser.markAsCompleted(1);
+    parser.markAsCompleted(2);
+    parser.markAsCompleted(3);
+
+    notes_ = parser.getNotesList();
+    assertEquals(expected_arr_size+3, notes_.size());
+    assertEquals(true, notes_.get(1).getCompleted());
+    assertEquals(true, notes_.get(2).getCompleted());
+    assertEquals(true, notes_.get(3).getCompleted());
+
+
+    deleteTestFile();
+  }
+
+    
     @After
     public void tearDown()
     {
