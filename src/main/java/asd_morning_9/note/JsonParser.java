@@ -251,11 +251,14 @@ public class JsonParser
         if (item.get("date_when_completed") != null) {
           String str_date_when_completed = JSONValue.toJSONString(item.get("date_when_completed"));
 
-          DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-          Date date_when_completed = dateFormat.parse(str_date_when_completed);
-          notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_completed));
+          //DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+          //Date date_when_completed = dateFormat.parse(str_date_when_completed);
+          //notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_completed));
         }
-        else notes_.add(new Note(id, title, content, tags, completed, pinned));
+        else
+        {
+          notes_.add(new Note(id, title, content, tags, completed, pinned));
+        }
 
       }
     }

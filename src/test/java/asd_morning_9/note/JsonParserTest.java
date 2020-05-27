@@ -8,13 +8,9 @@ import org.junit.After;
 
 import java.io.File;
 import java.io.FileWriter;
-<<<<<<< HEAD
-import java.text.SimpleDateFormat;
-=======
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
->>>>>>> 327bd41ac93eeeda3d887d7228edff8e395ead61
 import java.util.ArrayList;
 import java.util.Date;
 
