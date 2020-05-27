@@ -359,7 +359,7 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
-  
+
   //Sort notes by Titel
    public static Comparator<Note> NoteTitelSort = new Comparator<Note>() {
 
@@ -433,7 +433,7 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
-  
+
   //Filter notes
   public void FilterNotesByTag(String tag)
   {
@@ -516,7 +516,7 @@ public class JsonParser
       }catch (MessagingException e){ System.out.println("ERROR: " + e);}
 
   }
-    
+
   private int getNewId()
   {
     if (notes_.size() > 0)
