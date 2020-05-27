@@ -221,9 +221,27 @@ public class DashboardView extends VerticalLayout
       notification.open();
 
     }));
+
+    Div import_note_cont = new Div();
+
+    TextField file = new TextField("Import path");
+    import_note_cont.add(file);
+
+    add(import_note_cont);
+
+    add(new Button("Import", event -> {
+      parser.ImportNotes(file.getValue());
+      parser.SaveNotes();
+      //TextField id = new TextField("id");
+      //parser.SaveNotes();
+      Notification notification = new Notification(
+              "Note was imported successfully!", 2000,
+              Notification.Position.MIDDLE);
+      notification.open();
+
+    }));
+
     add(ui);
-
-
 
   }
 }

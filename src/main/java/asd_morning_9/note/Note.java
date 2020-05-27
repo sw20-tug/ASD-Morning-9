@@ -1,5 +1,9 @@
 package asd_morning_9.note;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Note
 {
   private int id;
@@ -8,6 +12,8 @@ public class Note
   private String tags;
   private boolean completed;
   private boolean pinned;
+  private Date date_when_completed;
+
 
   public Note(int id, String title, String content, String tags)
   {
@@ -34,6 +40,7 @@ public class Note
     this.content = content;
     this.tags = "";
     this.completed = completed;
+    if (completed)  this.date_when_completed = new Date();
   }
 
   public Note(int id, String title, String content, String tags, Boolean completed)
@@ -43,9 +50,8 @@ public class Note
   this.content = content;
   this.tags = tags;
   this.completed = completed;
+  if (completed)  this.date_when_completed = new Date();
 }
-
-
 
 
   public Note(int id, String title, String content, String tags, Boolean completed, Boolean pinned)
@@ -55,8 +61,21 @@ public class Note
     this.content = content;
     this.tags = tags;
     this.completed = completed;
+    if (completed) this.date_when_completed = new Date();
     this.pinned = pinned;
   }
+
+  public Note(int id, String title, String content, String tags, Boolean completed, Boolean pinned, Date date_when_completed)
+  {
+    this.id = id;
+    this.title = title;
+    this.content = content;
+    this.tags = tags;
+    this.completed = completed;
+    if (completed) this.date_when_completed = date_when_completed;
+    this.pinned = pinned;
+  }
+
 
   /*public Note(String value, String value1) { //hab die erste Instanz entfernt
   }*/
@@ -114,5 +133,12 @@ public class Note
 
   public boolean getPinned(){return this.pinned;}
 
+  public Date getDate_when_completed() {
+    return date_when_completed;
+  }
 
+  public void setDate_when_completed(Date date_when_completed)
+  {
+    this.date_when_completed = date_when_completed;
+  }
 }

@@ -194,6 +194,21 @@ public class JsonParserTest
 
         deleteTestFile();
     }
+    @Test
+    public void ImportNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        boolean result = parser.ReadNotes(test_file);
+        notes_ = parser.getNotesList();
+        assertTrue(result);
+        assertEquals(expected_arr_size, notes_.size());
+
+        deleteTestFile();
+    }
 
     @Test
     public void GetNewIdTest()
@@ -265,6 +280,26 @@ public class JsonParserTest
         assertEquals("LTitle",notes_.get(4).getTitle());
         deleteTestFile();
     }
+    
+    @Test
+    public void ShareNotesTest()
+    {
+        createTestFile();
+
+        JsonParser parser;
+        ArrayList<Note> notes_;
+        parser = new JsonParser(test_file);
+        parser.ReadNotes(test_file);
+        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
+        parser.AddNote(new Note(1, "Title1", "content1", "this,are,some,tags1"));
+
+        parser.ShareNote("test.usertug12@gmail.com", "test.usertug1234@gmail.com", "test.usertug12", "test.user1234");
+        notes_ = parser.getNotesList();
+        assertEquals(expected_arr_size + 2, notes_.size());
+
+        deleteTestFile();
+    }
+
   
     @Test
     public void TagsTest()
@@ -292,8 +327,9 @@ public class JsonParserTest
 
       deleteTestFile();
     }
-  
-  @Test
+ 
+    
+   @Test
   public void MarkAsCompletedTest()
   {
     createTestFile();
@@ -317,10 +353,15 @@ public class JsonParserTest
     assertEquals(true, notes_.get(2).getCompleted());
     assertEquals(true, notes_.get(3).getCompleted());
 
+    String pattern = "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
+    String date_when_completed = simpleDateFormat.format(notes_.get(1).getDate_when_completed());
+    String str_today_day = simpleDateFormat.format(new Date());
+
+    assertEquals(str_today_day, date_when_completed);
     deleteTestFile();
   }
-
     
     @After
     public void tearDown()
