@@ -4,6 +4,7 @@ import asd_morning_9.note.JsonParser;
 import asd_morning_9.note.Note;
 import asd_morning_9.note.ui.MainLayout;
 import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.checkbox.CheckboxGroupVariant;
@@ -83,44 +84,6 @@ public class DashboardView extends VerticalLayout
           cont.add(footer);
         }
       }
-
-
-
-   /*   if(item.getTags() != "")
-      {
-        cont.add(head);
-        cont.add(item.getTags()); //new
-        cont.add("  ");
-        cont.add(footer);
-      }
-      /*
-      if(item.getTags2() != null)
-      {
-        cont.add(head);
-        cont.add(item.getTags2()); //new
-        cont.add("  ");
-        cont.add(footer);
-      }
-      if(item.getTags3() != " ")
-      {
-        cont.add(head);
-        cont.add(item.getTags3()); //new
-        cont.add("  ");
-        cont.add(footer);
-      }
-      if(item.getTags4() != "")
-      {
-        cont.add(head);
-        cont.add(item.getTags4()); //new
-        cont.add("  ");
-        cont.add(footer);
-      }
-      if(item.getTags5() != "")
-      {
-        cont.add(head);
-        cont.add(item.getTags5()); //new
-        cont.add(footer);
-      }*/
 
       Icon star;
       if (item.getPinned())

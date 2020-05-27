@@ -1,33 +1,20 @@
 package asd_morning_9.note;
 
-import elemental.json.Json;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.Map;
-import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
+import org.json.simple.parser.JSONParser;
 
 import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Calendar;
+import java.util.*;
+
 
 public class JsonParser
 {
@@ -114,12 +101,12 @@ public class JsonParser
     notes_.add(note);
   }
 
-  public void EditNote (int id, String title, Note note)
+  public void EditNote (int id, String title, String note)
   {
     boolean check;
     for (Note item : notes_)
     {
-      if (item.getTitle().equals(note.getTitle()))
+      if (item.getTitle().equals(title))
       {
         //item.setContent(content);
         //item.setCompleted(completed);
@@ -127,7 +114,8 @@ public class JsonParser
         int x;
         x = item.getId();
         //notes_.set(x, note);
-        item.setContent(note.getContent());
+        item.setContent(note);
+        SaveNotes();
         break;
       }
     }
@@ -149,7 +137,7 @@ public class JsonParser
     }
   }
 
-  public void SaveNotes()
+   public void SaveNotes()
   {
     JSONObject obj = new JSONObject();
 
@@ -164,10 +152,11 @@ public class JsonParser
       item_obj.put("tags", item.getTags());
       item_obj.put("completed", item.isCompleted());
       item_obj.put("pinned", item.getPinned());
-      item_obj.put("date_when_created", item.getDate_when_created());
-      if (item.getDate_when_completed() != null)  item_obj.put("date_when_completed", item.getDate_when_completed());
-
       list.add(item_obj);
+
+      if (item.getDate_when_completed() != null)
+    item_obj.put("date_when_completed", item.getDate_when_completed());
+
     }
 
     obj.put("Notes", list);
@@ -202,11 +191,11 @@ public class JsonParser
       item_obj.put("tags", item.getTags());
       item_obj.put("completed", item.isCompleted());
       item_obj.put("pinned", item.getPinned());
-      item_obj.put("date_when_created", item.getDate_when_created_str());
-      if (item.getDate_when_completed() != null)
-        item_obj.put("date_when_completed", item.getDate_when_completed_str());
-
       list.add(item_obj);
+
+      if (item.getDate_when_completed() != null)
+        item_obj.put("date_when_completed", item.getDate_when_completed());
+
     }
 
     obj.put("Notes", list);
@@ -252,8 +241,6 @@ public class JsonParser
         String id_string = JSONValue.toJSONString(item.get("id"));
         int id = Integer.parseInt(id_string);
 
-
-
         String title = item.get("title").toString();
         String content = item.get("content").toString();
 
@@ -261,19 +248,17 @@ public class JsonParser
         Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
         boolean completed = Boolean.parseBoolean(item.get("completed").toString());
 
-        String date_when_created_str = (String)item.get("date_when_created");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y-M-dd", Locale.ENGLISH);
-        LocalDate date_when_created = LocalDate.parse(date_when_created_str, formatter);
+        if (item.get("date_when_completed") != null) {
+          String str_date_when_completed = JSONValue.toJSONString(item.get("date_when_completed"));
 
-       if (item.get("date_when_completed") != null) {
-          String date_when_completed_str = (String)item.get("date_when_created");
-          LocalDate date_when_completed = LocalDate.parse(date_when_completed_str, formatter);
-          notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_created, date_when_completed));
+          //DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+          //Date date_when_completed = dateFormat.parse(str_date_when_completed);
+          //notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_completed));
         }
         else
-          notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_created));
-
-
+        {
+          notes_.add(new Note(id, title, content, tags, completed, pinned));
+        }
 
       }
     }
@@ -310,6 +295,51 @@ public class JsonParser
     }
   }
 
+  public void ImportNotes(String file)
+  {
+    System.out.println(file);
+    try
+    {
+      // parsing file "JSONExample.json"
+      Object obj = new JSONParser().parse(new FileReader(file));
+
+      // typecasting obj to JSONObject
+      JSONObject jo = (JSONObject) obj;
+
+      // getting notes
+      JSONArray ja = (JSONArray) jo.get("Notes");
+
+      if (notes_ != null)
+
+        notes_.clear();
+
+      Iterator itr = ja.iterator();
+      while (itr.hasNext())
+      {
+
+        JSONObject item = (JSONObject) itr.next();
+
+        String id_string = JSONValue.toJSONString(item.get("id"));
+        int id = Integer.parseInt(id_string);
+
+
+
+        String title = item.get("title").toString();
+        String content = item.get("content").toString();
+
+        String tags = item.get("tags").toString();
+        Boolean pinned = Boolean.parseBoolean(item.get("pinned").toString());
+        boolean completed = Boolean.parseBoolean(item.get("completed").toString());
+
+        notes_.add(new Note(id, title, content, tags, completed, pinned));
+      }
+    }
+    catch (Exception e)
+    {
+      System.out.println("[ERROR IN READ NOTES] " + e.getMessage());
+    }
+  }
+
   // Delete note with specific id
   public void DeleteNote(int id)
   {
@@ -332,7 +362,7 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
-  
+
   //Sort notes by Titel
    public static Comparator<Note> NoteTitelSort = new Comparator<Note>() {
 
@@ -406,7 +436,7 @@ public class JsonParser
       System.out.println("[ERROR IN DELETE NOTE] " + e.getMessage());
     }
   }
-  
+
   //Filter notes
   public void FilterNotesByTag(String tag)
   {
@@ -489,7 +519,7 @@ public class JsonParser
       }catch (MessagingException e){ System.out.println("ERROR: " + e);}
 
   }
-    
+
   private int getNewId()
   {
     if (notes_.size() > 0)
@@ -512,7 +542,7 @@ public class JsonParser
         if (item.getId() == id)
         {
           item.setCompleted(true);
-          item.setDate_when_completed(LocalDate.now());
+          //item.setDate_when_completed();
           return;
         }
       }
