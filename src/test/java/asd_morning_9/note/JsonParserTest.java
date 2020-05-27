@@ -8,14 +8,18 @@ import org.junit.After;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class JsonParserTest
 {
     private int expected_arr_size = 1;
-    private String test_file = ".\\src\\test\\java\\asd_morning_9\\note\\config_test.json";
+    private String test_file = "src/test/java/asd_morning_9/note/config_test.json";
 
     @Before
     public void setUp()
@@ -47,6 +51,8 @@ public class JsonParserTest
         item_obj.put("content", item.getContent());
         item_obj.put("tags", item.getTags());
         item_obj.put("completed", item.isCompleted());
+        item_obj.put("date_when_created", item.getDate_when_created_str());
+        if (item.getDate_when_completed() != null) {item_obj.put("date_when_completed", item.getDate_when_completed_str());}
         item_obj.put("pinned", item.getPinned());
         list.add(item_obj);
 
@@ -100,10 +106,18 @@ public class JsonParserTest
         ArrayList<Note> notes_;
         parser = new JsonParser(test_file);
         parser.ReadNotes(test_file);
-        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
-        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
+
+        parser.AddNote(new Note(1, "TitleTEST1", "content", "this,are,some,tags"));
+        parser.AddNote(new Note(2, "TitleTEST2", "content", "this,are,some,tags"));
+
+        parser.SaveNotes();
+
         notes_ = parser.getNotesList();
-        assertEquals(expected_arr_size + 2, notes_.size());
+
+        assertEquals(expected_arr_size, notes_.size());
+
+        System.out.print(notes_.get(0).getTitle());
+        System.out.print(notes_.get(0).getDate_when_created());
 
         deleteTestFile();
     }
@@ -175,42 +189,6 @@ public class JsonParserTest
     }
 
     @Test
-    public void ExportNotesTest()
-    {
-        createTestFile();
-
-        JsonParser parser;
-        ArrayList<Note> notes_;
-        parser = new JsonParser(test_file);
-        parser.ReadNotes(test_file);
-        parser.AddNote(new Note(0, "Title", "content", "this,are,some,tags"));
-        parser.SaveNotes(test_file);
-        parser.ReadNotes(test_file);
-        notes_ = parser.getNotesList();
-        assertEquals(expected_arr_size + 1, notes_.size());
-
-        parser.DeleteNote(0);
-        parser.SaveNotes();
-
-        deleteTestFile();
-    }
-    @Test
-    public void ImportNotesTest()
-    {
-        createTestFile();
-
-        JsonParser parser;
-        ArrayList<Note> notes_;
-        parser = new JsonParser(test_file);
-        boolean result = parser.ReadNotes(test_file);
-        notes_ = parser.getNotesList();
-        assertTrue(result);
-        assertEquals(expected_arr_size, notes_.size());
-
-        deleteTestFile();
-    }
-
-    @Test
     public void GetNewIdTest()
     {
         createTestFile();
@@ -238,7 +216,7 @@ public class JsonParserTest
         JsonParser parser;
         ArrayList<Note> notes_;
         parser = new JsonParser(test_file);
-        parser.ReadNotes(test_file);
+        //parser.ReadNotes(test_file);
 
         parser.AddNote(new Note(1, "Title1", "content1", "none"));
         parser.AddNote(new Note(2, "Title2", "content2", "important"));
@@ -327,9 +305,9 @@ public class JsonParserTest
 
       deleteTestFile();
     }
- 
-    
-   @Test
+
+  
+  @Test
   public void MarkAsCompletedTest()
   {
     createTestFile();
@@ -353,11 +331,8 @@ public class JsonParserTest
     assertEquals(true, notes_.get(2).getCompleted());
     assertEquals(true, notes_.get(3).getCompleted());
 
-    String pattern = "yyyy-MM-dd";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
-    String date_when_completed = simpleDateFormat.format(notes_.get(1).getDate_when_completed());
-    String str_today_day = simpleDateFormat.format(new Date());
+    String date_when_completed = notes_.get(1).getDate_when_completed().toString();
+    String str_today_day = LocalDate.now().toString();
 
     assertEquals(str_today_day, date_when_completed);
     deleteTestFile();
