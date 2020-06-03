@@ -40,7 +40,7 @@ public class MainView extends VerticalLayout
 {
 
     private JsonParser parser;
-    public int language = 2; //0 = Englisch, 1 = Deutsch, 2 = Französisch
+    public int language = 0; //0 = Englisch, 1 = Deutsch, 2 = Französisch
     public MainView() {
         if(language == 1)
         {
@@ -139,13 +139,11 @@ public class MainView extends VerticalLayout
             title.setLabel("Title");
             title.setClassName("newNoteTitle");
 
-
             TextField tags = new TextField();
             tags.setLabel("Tags");
 
             tags.setClassName("newNoteTags");
 
-<<<<<<< HEAD
             TextArea content = new TextArea("Content");
             content.getStyle().set("height", "150px");
             content.setPlaceholder("Write here ...");
@@ -154,44 +152,16 @@ public class MainView extends VerticalLayout
             new_note_cont.add(title);
             new_note_cont.add(tags);
             new_note_cont.add(content);
-=======
-
-        TextField tags = new TextField();
-        tags.setLabel("Tags");
-
-        tags.setClassName("newNoteTags");
-
-        TextArea content = new TextArea("Content");
-        content.getStyle().set("height", "150px");
-        content.setPlaceholder("Write here ...");
-        content.setClassName("newNoteContent");
-
-        new_note_cont.add(title);
-        new_note_cont.add(tags);
-        new_note_cont.add(content);
->>>>>>> 3aa368ed9a211c7e1979a902135c8c16f008bf55
 
             add(new_note_cont);
 
-<<<<<<< HEAD
             add(new Button("Save Note", event -> {
-=======
-        add(new Button("Save Note", event -> {
-
-            parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
-            parser.SaveNotes();
-            Notification notification = new Notification(
-            "Note was saved successfully!", 2000,
-            Notification.Position.MIDDLE);
-            notification.open();
-        }));
->>>>>>> 3aa368ed9a211c7e1979a902135c8c16f008bf55
 
                 parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
                 parser.SaveNotes();
                 Notification notification = new Notification(
-                        "Note was saved successfully!", 2000,
-                        Notification.Position.MIDDLE);
+                "Note was saved successfully!", 2000,
+                Notification.Position.MIDDLE);
                 notification.open();
             }));
         }
