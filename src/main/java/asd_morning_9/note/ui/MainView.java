@@ -40,21 +40,121 @@ public class MainView extends VerticalLayout
 {
 
     private JsonParser parser;
-
+    public int language = 2; //0 = Englisch, 1 = Deutsch, 2 = Französisch
     public MainView() {
+        if(language == 1)
+        {
+            parser = new JsonParser();
+            parser.ReadNotes();
 
-        parser = new JsonParser();
-        parser.ReadNotes();
+            H1 header = new H1("Das ist die Hauptseite.");
+            add(header);
 
-        H1 header = new H1("This is the MainView of our Application.");
-        add(header);
+            Div new_note_cont = new Div();
 
-        Div new_note_cont = new Div();
+            TextField title = new TextField();
+            title.setLabel("Titel");
+            title.setClassName("newNoteTitle");
 
-        TextField title = new TextField();
-        title.setLabel("Title");
-        title.setClassName("newNoteTitle");
 
+            TextField tags = new TextField();
+            tags.setLabel("Tags");
+
+            tags.setClassName("newNoteTags");
+
+            TextArea content = new TextArea("Text");
+            content.getStyle().set("height", "150px");
+            content.setPlaceholder("Hier schreiben...");
+            content.setClassName("newNoteContent");
+
+            new_note_cont.add(title);
+            new_note_cont.add(tags);
+            new_note_cont.add(content);
+
+            add(new_note_cont);
+
+            add(new Button("Speichern", event -> {
+
+                parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
+                parser.SaveNotes();
+                Notification notification = new Notification(
+                        "Gespeichert!", 2000,
+                        Notification.Position.MIDDLE);
+                notification.open();
+            }));
+
+        }
+        else if(language == 2)
+        {
+            parser = new JsonParser();
+            parser.ReadNotes();
+
+            H1 header = new H1("Page d'accueil.");
+            add(header);
+
+            Div new_note_cont = new Div();
+
+            TextField title = new TextField();
+            title.setLabel("Titre");
+            title.setClassName("newNoteTitle");
+
+
+            TextField tags = new TextField();
+            tags.setLabel("Tags");
+
+            tags.setClassName("newNoteTags");
+
+            TextArea content = new TextArea("Texte");
+            content.getStyle().set("height", "150px");
+            content.setPlaceholder("Ecrire ici ...");
+            content.setClassName("newNoteContent");
+
+            new_note_cont.add(title);
+            new_note_cont.add(tags);
+            new_note_cont.add(content);
+
+            add(new_note_cont);
+
+            add(new Button("Sauver", event -> {
+
+                parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
+                parser.SaveNotes();
+                Notification notification = new Notification(
+                        "Enregistré!", 2000,
+                        Notification.Position.MIDDLE);
+                notification.open();
+            }));
+        }
+        else
+        {
+            parser = new JsonParser();
+            parser.ReadNotes();
+
+            H1 header = new H1("This is the MainView of our Application.");
+            add(header);
+
+            Div new_note_cont = new Div();
+
+            TextField title = new TextField();
+            title.setLabel("Title");
+            title.setClassName("newNoteTitle");
+
+
+            TextField tags = new TextField();
+            tags.setLabel("Tags");
+
+            tags.setClassName("newNoteTags");
+
+<<<<<<< HEAD
+            TextArea content = new TextArea("Content");
+            content.getStyle().set("height", "150px");
+            content.setPlaceholder("Write here ...");
+            content.setClassName("newNoteContent");
+
+            new_note_cont.add(title);
+            new_note_cont.add(tags);
+            new_note_cont.add(content);
+=======
 
         TextField tags = new TextField();
         tags.setLabel("Tags");
@@ -69,9 +169,13 @@ public class MainView extends VerticalLayout
         new_note_cont.add(title);
         new_note_cont.add(tags);
         new_note_cont.add(content);
+>>>>>>> 3aa368ed9a211c7e1979a902135c8c16f008bf55
 
-        add(new_note_cont);
+            add(new_note_cont);
 
+<<<<<<< HEAD
+            add(new Button("Save Note", event -> {
+=======
         add(new Button("Save Note", event -> {
 
             parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
@@ -81,6 +185,15 @@ public class MainView extends VerticalLayout
             Notification.Position.MIDDLE);
             notification.open();
         }));
+>>>>>>> 3aa368ed9a211c7e1979a902135c8c16f008bf55
 
+                parser.AddNote(new Note(5, title.getValue(), content.getValue(), tags.getValue()));
+                parser.SaveNotes();
+                Notification notification = new Notification(
+                        "Note was saved successfully!", 2000,
+                        Notification.Position.MIDDLE);
+                notification.open();
+            }));
+        }
     }
 }
