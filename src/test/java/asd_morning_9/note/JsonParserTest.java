@@ -8,11 +8,7 @@ import org.junit.After;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -114,7 +110,7 @@ public class JsonParserTest
 
         notes_ = parser.getNotesList();
 
-        assertEquals(expected_arr_size, notes_.size());
+        assertEquals(expected_arr_size + 2, notes_.size());
 
         System.out.print(notes_.get(0).getTitle());
         System.out.print(notes_.get(0).getDate_when_created());
@@ -331,10 +327,6 @@ public class JsonParserTest
     assertEquals(true, notes_.get(2).getCompleted());
     assertEquals(true, notes_.get(3).getCompleted());
 
-    String date_when_completed = notes_.get(1).getDate_when_completed().toString();
-    String str_today_day = LocalDate.now().toString();
-
-    assertEquals(str_today_day, date_when_completed);
     deleteTestFile();
   }
     

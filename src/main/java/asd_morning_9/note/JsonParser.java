@@ -11,8 +11,6 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -43,11 +41,6 @@ public class JsonParser
 
     return list;
   }
-  /*public ArrayList<Note> getCheckedNotesList()
-  {
-    return selected_notes;
-  }
-  */
 
   public void addId (int id) {
 
@@ -103,23 +96,15 @@ public class JsonParser
 
   public void EditNote (int id, String title, String note)
   {
-    boolean check;
     for (Note item : notes_)
     {
       if (item.getTitle().equals(title))
       {
-        //item.setContent(content);
-        //item.setCompleted(completed);
-        //item.setTags(tags);
-        int x;
-        x = item.getId();
-        //notes_.set(x, note);
         item.setContent(note);
         SaveNotes();
         break;
       }
     }
-    //SaveNotes();
   }
 
   public void EditNote(Note oldNote, Note newNote)
@@ -250,10 +235,6 @@ public class JsonParser
 
         if (item.get("date_when_completed") != null) {
           String str_date_when_completed = JSONValue.toJSONString(item.get("date_when_completed"));
-
-          //DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-          //Date date_when_completed = dateFormat.parse(str_date_when_completed);
-          //notes_.add(new Note(id, title, content, tags, completed, pinned, date_when_completed));
         }
         else
         {
@@ -443,7 +424,6 @@ public class JsonParser
     try
     {
       notes_.removeIf(item -> !item.getTags().contains(tag));
-      //notes_.removeIf(item -> !item.getTags().equals(tag));
 
     }
     catch (Exception e)
@@ -552,7 +532,5 @@ public class JsonParser
       System.out.println("[ERROR IN MARK AS COMPLETED] " + e.getMessage());
     }
   }
-  
-
 }
 
