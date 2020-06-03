@@ -1,6 +1,7 @@
 package asd_morning_9.note.ui;
 
 import asd_morning_9.note.ui.Dashboard.DashboardView;
+import asd_morning_9.note.ui.SortAndFilter;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -54,14 +55,15 @@ public class MainLayout extends AppLayout
 
   private void createDrawer() {
     RouterLink homeLink = new RouterLink("Home", MainView.class); //
-    RouterLink dashboardLink = new RouterLink("Dashboard", DashboardView.class); //
+    RouterLink dashboardLink = new RouterLink("Dashboard", DashboardView.class);//
+    RouterLink sortandfilterLink = new RouterLink("Sort and filter", SortAndFilter.class);
 
     homeLink.setHighlightCondition(HighlightConditions.sameLocation()); //
     dashboardLink.setHighlightCondition(HighlightConditions.sameLocation()); //
+    sortandfilterLink.setHighlightCondition(HighlightConditions.sameLocation());
 
-    VerticalLayout menu = new VerticalLayout(homeLink, dashboardLink);
+    VerticalLayout menu = new VerticalLayout(homeLink, dashboardLink, sortandfilterLink);
     menu.setId("menu");
-
 
     addToDrawer(menu);
   }
@@ -71,6 +73,7 @@ public class MainLayout extends AppLayout
     Notification notification = new Notification(
     "Here should be a dialog to create a new note..", 3000,
     Notification.Position.MIDDLE);
+
     notification.open();
   }
 }
