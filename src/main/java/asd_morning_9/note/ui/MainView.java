@@ -38,7 +38,6 @@ import org.json.simple.parser.*;
 @CssImport("./styles/MainView.css")
 public class MainView extends VerticalLayout
 {
-
     private JsonParser parser;
     public int language = 0; //0 = Englisch, 1 = Deutsch, 2 = Französisch
     public MainView() {
@@ -82,7 +81,6 @@ public class MainView extends VerticalLayout
                         Notification.Position.MIDDLE);
                 notification.open();
             }));
-
         }
         else if(language == 2)
         {
@@ -97,7 +95,6 @@ public class MainView extends VerticalLayout
             TextField title = new TextField();
             title.setLabel("Titre");
             title.setClassName("newNoteTitle");
-
 
             TextField tags = new TextField();
             tags.setLabel("Tags");
