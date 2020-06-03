@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 
 public class NoteTest
 {
-
     private int id = 0;
     private String title = "title";
     private String content = "content";

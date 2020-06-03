@@ -13,16 +13,12 @@ import com.vaadin.flow.router.Route;
 @Route(value = "SortAndFilter", layout = MainLayout.class)
 @CssImport("./styles/SortAndFilter.css")
 public class SortAndFilter extends VerticalLayout {
-
   private JsonParser parser;
-
   public int language = 0; //0 = Englisch, 1 = Deutsch, 2 = Französisch
   public SortAndFilter() {
 
     parser = new JsonParser();
     parser.ReadNotes();
-    //Note new_note = new Note(2, "new Title", "new Content");
-    //parser.AddNote(new_note);
     parser.SaveNotes();
     if(language == 1)
     {
@@ -39,7 +35,6 @@ public class SortAndFilter extends VerticalLayout {
 
         Header head = new Header();
         head.add(item.getTitle());
-        //li.addClassName(Integer.toString(item.getId()));
         cont.add(head);
         cont.add("Text: " + item.getContent());
         cont.add(br);
@@ -51,7 +46,6 @@ public class SortAndFilter extends VerticalLayout {
 
       //Sort by title
       add(new Button("Sortieren mit Titel", event -> {
-        //TextField id = new TextField("id");
         parser.SortNoteByTitel();
         remove(ui);
 
@@ -65,7 +59,6 @@ public class SortAndFilter extends VerticalLayout {
 
           Header head = new Header();
           head.add(item.getTitle());
-          //li.addClassName(Integer.toString(item.getId()));
           cont.add(head);
           cont.add("Text: " + item.getContent());
           cont.add(br);
@@ -82,7 +75,6 @@ public class SortAndFilter extends VerticalLayout {
       }));
 
       //Filter by tag
-
       TextField tag = new TextField();
       tag.setLabel("Tags");
       tag.setPlaceholder("Filtern mit tag ...");
@@ -109,7 +101,6 @@ public class SortAndFilter extends VerticalLayout {
 
           Header head = new Header();
           head.add(item.getTitle());
-          //li.addClassName(Integer.toString(item.getId()));
           cont.add(head);
           cont.add("Text: " + item.getContent());
           cont.add(br);
@@ -139,7 +130,6 @@ public class SortAndFilter extends VerticalLayout {
       for (Note item : parser.getNotesList())
       {
         Div cont = new Div();
-
         Header head = new Header();
         head.add(item.getTitle());
         cont.add(head);
@@ -163,7 +153,6 @@ public class SortAndFilter extends VerticalLayout {
         {
           Div cont = new Div();
           Div footer = new Div();
-
           Header head = new Header();
           head.add(item.getTitle());
           cont.add(head);
@@ -323,6 +312,5 @@ public class SortAndFilter extends VerticalLayout {
       }));
       add(ui);
     }
-
   }
 }
